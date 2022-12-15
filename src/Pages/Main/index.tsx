@@ -8,9 +8,12 @@ function Main() {
   // При таком рендере важно указывать key для каждого компонента. Он должен быть уникальным
   return (
     <>
-      {
-            testArr.map((item) => <TestForMain key={item} number={item} />)
-        }
+      {testArr.map((item) => (
+        <TestForMain
+          key={item}
+          number={item}
+        />
+      ))}
     </>
   );
 }

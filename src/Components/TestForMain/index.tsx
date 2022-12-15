@@ -1,7 +1,7 @@
 import './styles.scss';
 
 interface Props {
-    number: number
+  number: number;
 }
 // компонент объявлен в виде function expression, особой разницы нет, можно и declaration
 // также посмотрите на типизацию пропсов, можно типизировать через FC, почитайте в доке

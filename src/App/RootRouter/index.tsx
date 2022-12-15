@@ -14,8 +14,14 @@ export default function RootRouter() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/other" element={<Other />} />
+        <Route
+          path="/"
+          element={<Main />}
+        />
+        <Route
+          path="/other"
+          element={<Other />}
+        />
       </Routes>
     </div>
   );

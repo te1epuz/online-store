@@ -13,9 +13,7 @@ export default function Header() {
   // это встроенная переменная в элементе NavLink
   // NavLink мы взяли из react-router-dom
   const activeStyles = useMemo(
-    () => (bool: boolean) => (bool
-      ? styles.header__navigation__link__active
-      : styles.header__navigation__link),
+    () => (bool: boolean) => bool ? styles.header__navigation__link__active : styles.header__navigation__link,
     [],
   );
 

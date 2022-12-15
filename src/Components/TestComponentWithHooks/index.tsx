@@ -17,8 +17,18 @@ function TestComponentWithHooks() {
   return (
     <div>
       <h2>{`Current counter: ${counter}`}</h2>
-      <button type="button" onClick={() => setCounter((prev) => prev + 1)}>+</button>
-      <button type="button" onClick={() => setCounter((prev) => prev - 1)}>-</button>
+      <button
+        type="button"
+        onClick={() => setCounter((prev) => prev + 1)}
+      >
+        +
+      </button>
+      <button
+        type="button"
+        onClick={() => setCounter((prev) => prev - 1)}
+      >
+        -
+      </button>
     </div>
   );
 }

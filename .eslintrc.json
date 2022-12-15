@@ -15,15 +15,18 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "import/extensions": [1, "ignorePackages", {
+    "import/extensions": [
+      1,
+      "ignorePackages",
+      {
         "ts": "never",
         "tsx": "never"
-      }],
+      }
+    ],
+    "max-len": ["error", { "code": 120 }],
+    "no-confusing-arrow": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", "ts", "tsx"] }
-    ]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }]
   },
   "settings": {
     "import/resolver": {
