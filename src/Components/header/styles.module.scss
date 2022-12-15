@@ -1,0 +1,21 @@
+.header {
+    height: 100px;
+    background-color: red;
+    &__navigation {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        &__link {          
+            display: block;
+            margin-left: 50px;
+            color: white;
+            text-decoration: none;
+            &__active {
+                display: block;
+                text-decoration: underline;
+                margin-left: 50px;
+                color: black;
+            }
+        }
+    }
+}
