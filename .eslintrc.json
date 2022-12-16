@@ -27,7 +27,11 @@
     "no-confusing-arrow": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
-    "@typescript-eslint/no-explicit-any": 2
+    "@typescript-eslint/no-explicit-any": 2,
+    "implicit-arrow-linebreak": "off",
+    "object-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/resolver": {
