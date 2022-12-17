@@ -11,7 +11,7 @@ async function getProductById(id: number | string): Promise<TProduct> {
   const data: TProduct = await fetch(`https://dummyjson.com/products/${id}`)
     .then((res) => res.json())
     .then((list) => list);
-  // TODO check for missing page and reroute on 404
+  // TODO check for missing page and reroute to 404
   return data;
 }
 

@@ -1,3 +1,4 @@
+// наверн нужно вынести файл в pages т.к. это отдельная страница, а не просто компонент
 import { useEffect, useState } from 'react';
 import { getProductById } from '../../services/productService';
 import { TProduct } from '../../types/types';
@@ -5,7 +6,7 @@ import { TProduct } from '../../types/types';
 function changeCurrentImage(imageLink: string) {
   console.log(imageLink);
   // хотел сделать вместо консоль лог -> хук setCurrentImage(imageLink), чтобы поменять текущую выбранную картинку
-  // но так нельзя. как можно ещё не разобрался. врооде что-то про лифт-стейт-ап
+  // но так нельзя. как можно ещё не разобрался. вроооде что-то про лифт-стейт-ап
 
   // todo сделать обновление стилей списка картинок с выделением кликнутой
 }
@@ -16,7 +17,7 @@ function ProductImage({ imageLink }: { imageLink: string }) {
     </button>
   );
 }
-// не вынес компонент и функцию в отдельный файл, они вроде как нужыны, чтобы замэпать весь список картинок
+// не вынес компонент и функцию в отдельный файл, они вроде как нужны, чтобы замэпать весь список картинок
 
 function ProductDetails() {
   const currentProductId = Number(window.location.pathname.split('/')[2]);
