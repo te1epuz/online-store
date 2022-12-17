@@ -31,7 +31,8 @@
     "implicit-arrow-linebreak": "off",
     "object-curly-newline": "off",
     "react/jsx-one-expression-per-line": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "linebreak-style": "off"
   },
   "settings": {
     "import/resolver": {
