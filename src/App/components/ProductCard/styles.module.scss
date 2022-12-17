@@ -1,0 +1,14 @@
+.card {
+  position: relative;
+  width: 23%;
+  padding-top: 20%;
+  &__content {
+    top: 0;
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
