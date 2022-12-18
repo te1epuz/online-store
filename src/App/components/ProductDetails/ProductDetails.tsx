@@ -1,16 +1,17 @@
 // наверн нужно вынести файл в pages т.к. это отдельная страница, а не просто компонент
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/productService';
 import { TProduct } from '../../types/types';
 
 function ProductDetails() {
-  const currentProductId = Number(window.location.pathname.split('/')[2]);
+  const { id } = useParams();
   const [product, setProduct] = useState<TProduct | null>(null);
   const [currentImage, setCurrentImage] = useState<string>('');
 
   async function getData() {
     try {
-      const data = await getProductById(currentProductId);
+      const data = await getProductById(id);
       setProduct(data);
       setCurrentImage(data.images[0]);
     } catch (error) {
