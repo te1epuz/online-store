@@ -9,10 +9,6 @@ function HomePage() {
   const { products, categories } = useLoaderData() as { products: TResponse; categories: string[] };
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const handleSelect = (item: string) => {
-    setSelectedCategory(item);
-  };
-
   const clearFilter = () => {
     setSelectedCategory(null);
   };
@@ -29,7 +25,7 @@ function HomePage() {
           </div>
           <div className="categories">
             <Await resolve={categories}>
-              <CategoriesList onItemSelect={handleSelect} />
+              <CategoriesList setData={setSelectedCategory} />
               <button type="button" onClick={clearFilter}>
                 Сброс Фильтра
               </button>
