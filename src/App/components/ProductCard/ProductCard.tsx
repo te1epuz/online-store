@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { TProduct } from '../../types/types';
 import styles from './styles.module.scss';
+import { AddToCartBtn } from '../AddToCartBtn/AddToCartBtn';
 
 function ProductCard({ data }: { data: TProduct }) {
   return (
@@ -18,6 +19,7 @@ function ProductCard({ data }: { data: TProduct }) {
             <Link to={`/product-details/${data.id}`}>
               <button type="button">Details</button>
             </Link>
+            <AddToCartBtn data={data} />
           </div>
         </div>
       </div>
