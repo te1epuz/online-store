@@ -7,10 +7,11 @@ async function getAllProducts(): Promise<TProduct[]> {
   return data.products;
 }
 
-async function getProductById(id: number | string): Promise<TProduct> {
+async function getProductById(id: string | undefined): Promise<TProduct> {
   const data: TProduct = await fetch(`https://dummyjson.com/products/${id}`)
     .then((res) => res.json())
     .then((list) => list);
+  // TODO check for missing page and reroute to 404
   return data;
 }
 
