@@ -1,9 +1,5 @@
 /// types
 
-type TResponse = {
-  products: TProduct[];
-};
-
 type TProduct = {
   id: number | string;
   brand: string;
@@ -16,6 +12,9 @@ type TProduct = {
   stock: number;
   thumbnail: string;
   title: string;
+};
+type TResponse = {
+  products: TProduct[];
 };
 
 export type { TProduct, TResponse };

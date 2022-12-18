@@ -1,4 +1,3 @@
-// наверн нужно вынести файл в pages т.к. это отдельная страница, а не просто компонент
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/productService';

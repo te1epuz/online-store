@@ -33,6 +33,7 @@
     "react/jsx-one-expression-per-line": "off",
     "import/prefer-default-export": "off",
     "linebreak-style": "off"
+    // "no-unused-vars": "off"
   },
   "settings": {
     "import/resolver": {
