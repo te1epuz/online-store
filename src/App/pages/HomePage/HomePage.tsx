@@ -4,32 +4,35 @@ import { TResponse } from '../../types/types';
 // import styles from './styles.module.scss';
 import { ProductList } from '../../components/ProductList/ProductList';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';
+import { BrandsList } from '../../components/BrandsList/BrandList';
 
 function HomePage() {
   const { products, categories } = useLoaderData() as { products: TResponse; categories: string[] };
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const clearFilter = () => {
-    setSelectedCategory(null);
-  };
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  // const [productsArr, setProductsArr] = useState<TProduct[]>([]);
 
   return (
     <div>
       <h1>All products</h1>
       <div className="content" style={{ display: 'flex' }}>
         <Suspense fallback={<h2>LOADINK KEK...</h2>}>
-          <div className="items">
+          <div className="items" style={{ display: 'flex', flexWrap: 'wrap', minWidth: '1000px' }}>
             <Await resolve={products}>
-              <ProductList category={selectedCategory} />
+              <ProductList categories={selectedCategories} brands={selectedBrands} />
             </Await>
           </div>
-          <div className="categories">
-            <Await resolve={categories}>
-              <CategoriesList setData={setSelectedCategory} />
-              <button type="button" onClick={clearFilter}>
-                Сброс Фильтра
-              </button>
-            </Await>
+          <div className="filter">
+            <div className="categories">
+              <Await resolve={categories}>
+                <CategoriesList selectedItems={selectedCategories} setData={setSelectedCategories} />
+              </Await>
+            </div>
+            <div className="brands">
+              <Await resolve={products}>
+                <BrandsList data={selectedBrands} setData={setSelectedBrands} />
+              </Await>
+            </div>
           </div>
         </Suspense>
       </div>
