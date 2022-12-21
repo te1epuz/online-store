@@ -1,36 +1,38 @@
 import React from 'react';
 import { useAsyncValue } from 'react-router-dom';
 import styles from './styles.module.scss';
+import { SetURLSearchParams, TQueryParams } from '../../types/types';
 
 type TProps = {
-  selectedItems: string[];
-  setData: React.Dispatch<React.SetStateAction<string[]>>;
+  query: string[];
+  setData: SetURLSearchParams;
+  data: URLSearchParams;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function CategoriesList({ selectedItems, setData }: TProps) {
+function CategoriesList({ query, setData, data, setLoading }: TProps) {
   const categories = useAsyncValue() as string[];
 
-  const clearFilter = () => {
-    setData([]);
+  const handleSelect = async (item: string) => {
+    setLoading(true);
+    const params: TQueryParams = {
+      category: [],
+      brand: [],
+    };
+
+    params.category = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
+    params.brand = data.getAll('brand');
+
+    setData(params);
   };
-  const handleSelect = (item: string) => {
-    setData((prev) => {
-      if (!prev.includes(item)) {
-        return [...prev, item];
-      }
-      return prev.filter((i) => i !== item);
-    });
-  };
+  console.log('category');
 
   return (
     <ul>
-      <button type="button" onClick={clearFilter}>
-        Сброс Фильтра
-      </button>
       {categories.map((category) => (
         <button
           type="button"
-          className={selectedItems.includes(category) ? styles.bgRed : ''}
+          className={query.includes(category) ? styles.bgRed : ''}
           onClick={() => handleSelect(category)}
           key={category}
         >

@@ -24,9 +24,9 @@ function ProductList({ categories, brands }: TProps) {
     return i;
   });
 
-  console.log(filteredArr);
-  console.log(categories);
-  console.log(brands);
+  // console.log(filteredArr);
+  // console.log(categories);
+  // console.log(brands);
   if (!filteredArr.length) return <h1>No products found</h1>;
   return (
     <>
