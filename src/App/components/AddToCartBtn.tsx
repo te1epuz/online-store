@@ -1,4 +1,4 @@
-import { TProduct } from '../../types/types';
+import { TProduct } from '../types/types';
 
 function AddToCartBtn({ data }: { data: TProduct }) {
   const handleCLick = () => {

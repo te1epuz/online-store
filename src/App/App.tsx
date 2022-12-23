@@ -1,5 +1,5 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import { Layout } from './components/Layout/Layout';
+import { Layout } from './components/layouts/MainLayout';
 import { HomePage } from './pages/HomePage/HomePage';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails';
 

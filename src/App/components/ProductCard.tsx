@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { TProduct } from '../../types/types';
-import styles from './styles.module.scss';
-import { AddToCartBtn } from '../AddToCartBtn/AddToCartBtn';
+import { TProduct } from '../types/types';
+import styles from './ProductCard.module.scss';
+import { AddToCartBtn } from './AddToCartBtn';
 
 function ProductCard({ data }: { data: TProduct }) {
   return (

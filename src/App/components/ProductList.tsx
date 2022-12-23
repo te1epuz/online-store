@@ -1,6 +1,6 @@
 // import React, { useEffect } from 'react';
-import { TProduct } from '../../types/types';
-import { ProductCard } from '../ProductCard/ProductCard';
+import { TProduct } from '../types/types';
+import { ProductCard } from './ProductCard';
 
 type TProps = {
   products: TProduct[];

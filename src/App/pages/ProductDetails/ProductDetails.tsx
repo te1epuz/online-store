@@ -14,7 +14,7 @@ function ProductDetails() {
       setProduct(data);
       setCurrentImage(data.images[0]);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
   useEffect(() => {
