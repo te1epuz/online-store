@@ -1,6 +1,6 @@
-import { SetURLSearchParams, TProduct, TQueryParams } from '../../types/types';
-import countProducts from '../../utils/countProducts';
-import styles from './styles.module.scss';
+import { SetURLSearchParams, TProduct, TQueryParams } from '../types/types';
+import countProducts from '../utils/countProducts';
+import styles from './BrandList.module.scss';
 
 type TProps = {
   products: TProduct[];

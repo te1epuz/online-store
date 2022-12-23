@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TProduct } from '../../types/types';
-// import styles from './styles.module.scss';
-import { ProductList } from '../../components/ProductList/ProductList';
-import CategoriesList from '../../components/CategoriesList/CategoriesList';
-import { BrandsList } from '../../components/BrandsList/BrandList';
+// import styles from './HomePage.module.scss';
+import { ProductList } from '../../components/ProductList';
+import CategoriesList from '../../components/CategoriesList';
+import { BrandsList } from '../../components/BrandList';
 import { getAllCategories, getAllProducts } from '../../services/productService';
 import countProducts from '../../utils/countProducts';
-import { SearchInput } from '../../components/SearchInput/SearchInput';
-import { SelectSortBy } from '../../components/SelectSortBy/SelectSortBy';
+import { SearchInput } from '../../components/SearchInput';
+import { SelectSortBy } from '../../components/SelectSortBy';
 
 function HomePage() {
   const [products, setProducts] = useState<TProduct[]>([]);
@@ -42,7 +42,7 @@ function HomePage() {
   };
 
   const copyURL = () => {
-    console.log('KAK? hmmmm...');
+    // console.log('KAK? hmmmm...');
   };
 
   const filter = () => {
@@ -99,7 +99,7 @@ function HomePage() {
   const filteredArr = filter();
   // console.log(filteredArr);
   const sortedArr = sortArr(filteredArr);
-  console.log('sortedArr', sortedArr);
+  // console.log('sortedArr', sortedArr);
 
   return !isLoading ? (
     <div>

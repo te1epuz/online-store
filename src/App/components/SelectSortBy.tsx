@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SetURLSearchParams, TQueryParams } from '../../types/types';
+import { SetURLSearchParams, TQueryParams } from '../types/types';
 
 const sortOptions = [
   { label: 'цене по возрастанию', value: 'price-asc' },
@@ -27,7 +27,7 @@ function SelectSortBy({ query, setData, data }: TProps) {
     params.brand = data.getAll('brand');
     params.sort = e.target.value || '';
 
-    console.log('query', query);
+    // console.log('query', query);
     setData(params);
   };
   return (

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import styles from './styles.module.scss';
+import styles from './Header.module.scss';
 
 function Header() {
   const activeStyles = (bool: boolean) =>
