@@ -64,6 +64,7 @@ function ProductDetails() {
             <p>Discount: {product.discountPercentage}%</p>
             <p>Rating: {product.rating}</p>
             <p>Stock: {product.stock}</p>
+            <p>Description: {product.description}</p>
           </div>
           <div>
             <p>Price: ${product.price}</p>

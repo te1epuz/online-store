@@ -45,19 +45,18 @@ function HomePage() {
     // console.log('KAK? hmmmm...');
   };
 
-  function filterArray() {
-    const filteredArr = products.filter((product) => {
-      if (
-        (product.title + product.category + product.description + product.brand).includes(search.toLowerCase()) &&
-        (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
-        (brandsParams?.length ? brandsParams.includes(product.brand) : true)
-      ) {
-        return true;
-      }
-      return false;
-    });
-    return filteredArr;
-  }
+  const filteredArr = products.filter((product) => {
+    if (
+      (product.title + product.category + product.description + product.brand)
+        .toLowerCase()
+        .includes(search.toLowerCase()) &&
+      (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
+      (brandsParams?.length ? brandsParams.includes(product.brand) : true)
+    ) {
+      return true;
+    }
+    return false;
+  });
 
   // const filter = () => {
   //   const textEqual = (item: TProduct) =>
@@ -105,16 +104,15 @@ function HomePage() {
     return arr;
   };
 
-  const wholeCountCategories = countProducts(products, 'category');
-  const wholeCountBrands = countProducts(products, 'brand');
-  // console.log(wholeCountCategories);
-  // console.log(wholeCountBrands);
-
-  const filteredArr = filterArray();
+  // const filteredArr = filterArray();
   // console.log('filteredArr:', filteredArr);
 
   const sortedArr = sortArr(filteredArr);
   // console.log('sortedArr', sortedArr);
+  const wholeCountCategories = countProducts(products, 'category');
+  const wholeCountBrands = countProducts(products, 'brand');
+  // console.log(wholeCountCategories);
+  // console.log(wholeCountBrands);
 
   return !isLoading ? (
     <div>
