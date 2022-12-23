@@ -42,7 +42,11 @@ function HomePage() {
   };
 
   const copyURL = () => {
-    // console.log('KAK? hmmmm...');
+    const text = window.location.href;
+    navigator.clipboard
+      .writeText(text)
+      .then(() => console.log('Async: Copying to clipboard was successful!'))
+      .catch((err) => console.error('Async: Could not copy text: ', err));
   };
 
   const filteredArr = products.filter((product) => {
