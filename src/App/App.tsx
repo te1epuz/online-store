@@ -1,12 +1,12 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements, Navigate } from 'react-router-dom';
-import { Layout } from './components/layouts/MainLayout';
+import MainLayout from './components/layouts/MainLayout';
+import HomePage from './pages/HomePage';
+import ProductDetails from './pages/ProductDetails';
 import NotFound from './pages/NotFound';
-import { HomePage } from './pages/HomePage';
-import { ProductDetails } from './pages/ProductDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<MainLayout />}>
       <Route index element={<HomePage />} />
       <Route path="product-details/:id" element={<ProductDetails />} />
 

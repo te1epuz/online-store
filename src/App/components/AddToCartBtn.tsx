@@ -11,4 +11,4 @@ function AddToCartBtn({ data }: { data: TProduct }) {
   );
 }
 
-export { AddToCartBtn };
+export default AddToCartBtn;

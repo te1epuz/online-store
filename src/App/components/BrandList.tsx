@@ -49,4 +49,4 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
   );
 }
 
-export { BrandsList };
+export default BrandsList;

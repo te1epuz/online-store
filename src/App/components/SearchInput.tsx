@@ -34,4 +34,4 @@ function SearchInput({ query, setData, data }: TProps) {
   );
 }
 
-export { SearchInput };
+export default SearchInput;

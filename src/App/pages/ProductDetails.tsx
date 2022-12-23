@@ -78,4 +78,4 @@ function ProductDetails() {
   );
 }
 
-export { ProductDetails };
+export default ProductDetails;
