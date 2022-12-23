@@ -1,40 +1,52 @@
-import React from 'react';
-import { useAsyncValue } from 'react-router-dom';
 import styles from './styles.module.scss';
+import { SetURLSearchParams, TProduct, TQueryParams } from '../../types/types';
+import countProducts from '../../utils/countProducts';
 
 type TProps = {
-  selectedItems: string[];
-  setData: React.Dispatch<React.SetStateAction<string[]>>;
+  products: TProduct[];
+  categories: string[];
+  query: string[];
+  setData: SetURLSearchParams;
+  data: URLSearchParams;
+  wholeCount: { [key: string]: number };
 };
 
-function CategoriesList({ selectedItems, setData }: TProps) {
-  const categories = useAsyncValue() as string[];
-
-  const clearFilter = () => {
-    setData([]);
-  };
+function CategoriesList({ products, categories, query, setData, data, wholeCount }: TProps) {
   const handleSelect = (item: string) => {
-    setData((prev) => {
-      if (!prev.includes(item)) {
-        return [...prev, item];
-      }
-      return prev.filter((i) => i !== item);
-    });
+    const params: TQueryParams = {
+      category: [],
+      brand: [],
+      search: '',
+      sort: '',
+    };
+    params.search = data.get('search') || '';
+    params.sort = data.get('sort') || '';
+    params.category = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
+    params.brand = data.getAll('brand');
+
+    setData(params);
   };
+  // console.log('category');
+  // console.log(products);
+  // console.log('query', query);
+
+  const currentCount = countProducts(products, 'category');
+
+  console.log('currentCount categories', currentCount);
 
   return (
     <ul>
-      <button type="button" onClick={clearFilter}>
-        Сброс Фильтра
-      </button>
       {categories.map((category) => (
         <button
           type="button"
-          className={selectedItems.includes(category) ? styles.bgRed : ''}
+          className={query.includes(category) ? styles.bgRed : ''}
           onClick={() => handleSelect(category)}
           key={category}
         >
-          {category}
+          {category}{' '}
+          <span>
+            ({currentCount[category] ? currentCount[category] : 0}/{wholeCount[category]})
+          </span>
         </button>
       ))}
     </ul>

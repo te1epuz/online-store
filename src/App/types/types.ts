@@ -1,4 +1,5 @@
-/// types
+import { NavigateOptions, URLSearchParamsInit } from 'react-router-dom';
+import { URLSearchParams } from 'url';
 
 type TProduct = {
   id: number | string;
@@ -13,8 +14,23 @@ type TProduct = {
   thumbnail: string;
   title: string;
 };
+
 type TResponse = {
   products: TProduct[];
 };
 
-export type { TProduct, TResponse };
+type TQueryParams = {
+  category: string[];
+  brand: string[];
+  search: string;
+  sort: string;
+};
+
+type SetURLSearchParams = (
+  // eslint-disable-next-line no-unused-vars
+  nextInit?: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit),
+  // eslint-disable-next-line no-unused-vars
+  navigateOpts?: NavigateOptions,
+) => void;
+
+export type { TProduct, TResponse, TQueryParams, SetURLSearchParams };
