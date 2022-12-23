@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getProductById } from '../../services/productService';
 import { TProduct } from '../../types/types';
 
 function ProductDetails() {
   const { id } = useParams();
-  const [product, setProduct] = useState<TProduct | null>(null);
+  const [product, setProduct] = useState<TProduct | null | 'not found'>(null);
   const [currentImage, setCurrentImage] = useState<string>('');
 
   async function getData() {
-    try {
-      const data = await getProductById(id);
-      setProduct(data);
+    const data = await getProductById(id);
+    setProduct(data);
+    if (data === 'not found') {
+      setCurrentImage('');
+    } else {
       setCurrentImage(data.images[0]);
-    } catch (error) {
-      // console.error(error);
     }
   }
   useEffect(() => {
@@ -24,6 +24,16 @@ function ProductDetails() {
   function changeCurrentImage(imageLink: string) {
     setCurrentImage(imageLink);
     // TODO добавить изменение стилей для списка картинок с выделением текущей
+  }
+
+  if (product !== null && product === 'not found') {
+    return (
+      <>
+        <h1>hmm...</h1>
+        <p>It seems product &apos;{id}&apos; doesn&apos;t exist :(</p>
+        <Link to="/">Go back to main page</Link>
+      </>
+    );
   }
 
   return product !== null ? (
