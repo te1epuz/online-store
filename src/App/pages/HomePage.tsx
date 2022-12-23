@@ -45,42 +45,56 @@ function HomePage() {
     // console.log('KAK? hmmmm...');
   };
 
-  const filter = () => {
-    const textEqual = (item: TProduct) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase()) ||
-      item.brand.toLowerCase().includes(search.toLowerCase());
-
-    const filteredArr = products.filter((i) => {
-      if (categoriesParams?.length && brandsParams.length && search) {
-        return (
-          categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand) && textEqual(i)
-        );
+  function filterArray() {
+    const filteredArr = products.filter((product) => {
+      if (
+        (product.title + product.category + product.description + product.brand).includes(search.toLowerCase()) &&
+        (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
+        (brandsParams?.length ? brandsParams.includes(product.brand) : true)
+      ) {
+        return true;
       }
-
-      if (categoriesParams?.length && brandsParams.length) {
-        return categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand);
-      }
-
-      if (categoriesParams?.length && !brandsParams.length && search) {
-        return categoriesParams.some((j) => j === i.category) && textEqual(i);
-      }
-
-      if (!categoriesParams?.length && brandsParams.length && search) {
-        return brandsParams.some((j) => j === i.brand) && textEqual(i);
-      }
-
-      if (categoriesParams?.length) return categoriesParams.some((j) => j === i.category);
-      if (brandsParams.length) return brandsParams.some((j) => j === i.brand);
-      if (search) {
-        return textEqual(i);
-      }
-
-      return i;
+      return false;
     });
     return filteredArr;
-  };
+  }
+
+  // const filter = () => {
+  //   const textEqual = (item: TProduct) =>
+  //     item.title.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.category.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.description.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.brand.toLowerCase().includes(search.toLowerCase());
+
+  //   const filteredArr = products.filter((i) => {
+  //     if (categoriesParams?.length && brandsParams.length && search) {
+  //       return (
+  //         categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand) && textEqual(i)
+  //       );
+  //     }
+
+  //     if (categoriesParams?.length && brandsParams.length) {
+  //       return categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand);
+  //     }
+
+  //     if (categoriesParams?.length && !brandsParams.length && search) {
+  //       return categoriesParams.some((j) => j === i.category) && textEqual(i);
+  //     }
+
+  //     if (!categoriesParams?.length && brandsParams.length && search) {
+  //       return brandsParams.some((j) => j === i.brand) && textEqual(i);
+  //     }
+
+  //     if (categoriesParams?.length) return categoriesParams.some((j) => j === i.category);
+  //     if (brandsParams.length) return brandsParams.some((j) => j === i.brand);
+  //     if (search) {
+  //       return textEqual(i);
+  //     }
+
+  //     return i;
+  //   });
+  //   return filteredArr;
+  // };
 
   const sortArr = (arr: TProduct[]) => {
     if (sort) {
@@ -96,8 +110,9 @@ function HomePage() {
   // console.log(wholeCountCategories);
   // console.log(wholeCountBrands);
 
-  const filteredArr = filter();
-  // console.log(filteredArr);
+  const filteredArr = filterArray();
+  // console.log('filteredArr:', filteredArr);
+
   const sortedArr = sortArr(filteredArr);
   // console.log('sortedArr', sortedArr);
 
