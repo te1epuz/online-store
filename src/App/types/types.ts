@@ -14,6 +14,7 @@ type TProduct = {
   thumbnail: string;
   title: string;
 };
+
 type TResponse = {
   products: TProduct[];
 };
@@ -21,6 +22,8 @@ type TResponse = {
 type TQueryParams = {
   category: string[];
   brand: string[];
+  search: string;
+  sort: string;
 };
 
 type SetURLSearchParams = (

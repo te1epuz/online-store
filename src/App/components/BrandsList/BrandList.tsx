@@ -1,30 +1,32 @@
-import React from 'react';
-import { useAsyncValue } from 'react-router-dom';
 import { SetURLSearchParams, TProduct, TQueryParams } from '../../types/types';
+import countProducts from '../../utils/countProducts';
 import styles from './styles.module.scss';
 
 type TProps = {
+  products: TProduct[];
+  brands: string[];
   query: string[];
   setData: SetURLSearchParams;
   data: URLSearchParams;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  wholeCount: { [key: string]: number };
 };
-function BrandsList({ query, setData, data, setLoading }: TProps) {
-  const products = useAsyncValue() as TProduct[];
-  const brands = Array.from(new Set(products.map((i) => i.brand[0].toUpperCase() + i.brand.toLowerCase().slice(1))));
-
+function BrandsList({ products, brands, query, setData, data, wholeCount }: TProps) {
   const handleClick = (item: string) => {
-    setLoading(true);
     const params: TQueryParams = {
       category: [],
       brand: [],
+      search: '',
+      sort: '',
     };
+    params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
+    params.search = data.get('search') || '';
     params.brand = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
 
     setData(params);
   };
-  console.log('brand');
+  const currentCount = countProducts(products, 'brand');
+  console.log('currentCount brands', currentCount);
 
   return (
     <>
@@ -37,7 +39,10 @@ function BrandsList({ query, setData, data, setLoading }: TProps) {
           type="button"
           onClick={() => handleClick(brand)}
         >
-          {brand}
+          {brand}{' '}
+          <span>
+            ({currentCount[brand] ? currentCount[brand] : 0}/{wholeCount[brand]})
+          </span>
         </button>
       ))}
     </>
