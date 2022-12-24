@@ -50,4 +50,4 @@ function SelectSortBy({ query, setData, data }: TProps) {
   );
 }
 
-export { SelectSortBy };
+export default SelectSortBy;

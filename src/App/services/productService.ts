@@ -15,11 +15,18 @@ async function getAllCategories(): Promise<string[]> {
   return data;
 }
 
-async function getProductById(id: string | undefined): Promise<TProduct> {
-  const data: TProduct = await fetch(`https://dummyjson.com/products/${id}`)
-    .then((res) => res.json())
-    .then((list) => list);
-  return data;
+async function getProductById(id: string | undefined) {
+  let result;
+  try {
+    result = await fetch(`https://dummyjson.com/products/${id}`);
+    if (!result.ok) {
+      return 'not found';
+    }
+    result = await result.json();
+  } catch (error) {
+    console.log(123123123123123, error);
+  }
+  return result;
 }
 
 export { getAllProducts, getProductById, getAllCategories };

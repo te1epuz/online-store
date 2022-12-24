@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { TProduct } from '../../types/types';
+import { TProduct } from '../types/types';
 // import styles from './HomePage.module.scss';
-import { ProductList } from '../../components/ProductList';
-import CategoriesList from '../../components/CategoriesList';
-import { BrandsList } from '../../components/BrandList';
-import { getAllCategories, getAllProducts } from '../../services/productService';
-import countProducts from '../../utils/countProducts';
-import { SearchInput } from '../../components/SearchInput';
-import { SelectSortBy } from '../../components/SelectSortBy';
+import ProductList from '../components/ProductList';
+import CategoriesList from '../components/CategoriesList';
+import BrandsList from '../components/BrandList';
+import { getAllCategories, getAllProducts } from '../services/productService';
+import countProducts from '../utils/countProducts';
+import SearchInput from '../components/SearchInput';
+import SelectSortBy from '../components/SelectSortBy';
 
 function HomePage() {
   const [products, setProducts] = useState<TProduct[]>([]);
@@ -42,45 +42,62 @@ function HomePage() {
   };
 
   const copyURL = () => {
-    // console.log('KAK? hmmmm...');
+    const text = window.location.href;
+    navigator.clipboard
+      .writeText(text)
+      .then(() => console.log('Async: Copying to clipboard was successful!'))
+      .catch((err) => console.error('Async: Could not copy text: ', err));
   };
 
-  const filter = () => {
-    const textEqual = (item: TProduct) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase()) ||
-      item.brand.toLowerCase().includes(search.toLowerCase());
+  const filteredArr = products.filter((product) => {
+    if (
+      (product.title + product.category + product.description + product.brand)
+        .toLowerCase()
+        .includes(search.toLowerCase()) &&
+      (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
+      (brandsParams?.length ? brandsParams.includes(product.brand) : true)
+    ) {
+      return true;
+    }
+    return false;
+  });
 
-    const filteredArr = products.filter((i) => {
-      if (categoriesParams?.length && brandsParams.length && search) {
-        return (
-          categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand) && textEqual(i)
-        );
-      }
+  // const filter = () => {
+  //   const textEqual = (item: TProduct) =>
+  //     item.title.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.category.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.description.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.brand.toLowerCase().includes(search.toLowerCase());
 
-      if (categoriesParams?.length && brandsParams.length) {
-        return categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand);
-      }
+  //   const filteredArr = products.filter((i) => {
+  //     if (categoriesParams?.length && brandsParams.length && search) {
+  //       return (
+  //         categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand) && textEqual(i)
+  //       );
+  //     }
 
-      if (categoriesParams?.length && !brandsParams.length && search) {
-        return categoriesParams.some((j) => j === i.category) && textEqual(i);
-      }
+  //     if (categoriesParams?.length && brandsParams.length) {
+  //       return categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand);
+  //     }
 
-      if (!categoriesParams?.length && brandsParams.length && search) {
-        return brandsParams.some((j) => j === i.brand) && textEqual(i);
-      }
+  //     if (categoriesParams?.length && !brandsParams.length && search) {
+  //       return categoriesParams.some((j) => j === i.category) && textEqual(i);
+  //     }
 
-      if (categoriesParams?.length) return categoriesParams.some((j) => j === i.category);
-      if (brandsParams.length) return brandsParams.some((j) => j === i.brand);
-      if (search) {
-        return textEqual(i);
-      }
+  //     if (!categoriesParams?.length && brandsParams.length && search) {
+  //       return brandsParams.some((j) => j === i.brand) && textEqual(i);
+  //     }
 
-      return i;
-    });
-    return filteredArr;
-  };
+  //     if (categoriesParams?.length) return categoriesParams.some((j) => j === i.category);
+  //     if (brandsParams.length) return brandsParams.some((j) => j === i.brand);
+  //     if (search) {
+  //       return textEqual(i);
+  //     }
+
+  //     return i;
+  //   });
+  //   return filteredArr;
+  // };
 
   const sortArr = (arr: TProduct[]) => {
     if (sort) {
@@ -91,15 +108,15 @@ function HomePage() {
     return arr;
   };
 
+  // const filteredArr = filterArray();
+  // console.log('filteredArr:', filteredArr);
+
+  const sortedArr = sortArr(filteredArr);
+  // console.log('sortedArr', sortedArr);
   const wholeCountCategories = countProducts(products, 'category');
   const wholeCountBrands = countProducts(products, 'brand');
   // console.log(wholeCountCategories);
   // console.log(wholeCountBrands);
-
-  const filteredArr = filter();
-  // console.log(filteredArr);
-  const sortedArr = sortArr(filteredArr);
-  // console.log('sortedArr', sortedArr);
 
   return !isLoading ? (
     <div>
@@ -146,4 +163,4 @@ function HomePage() {
   );
 }
 
-export { HomePage };
+export default HomePage;
