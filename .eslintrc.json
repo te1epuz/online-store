@@ -33,7 +33,10 @@
     "react/jsx-one-expression-per-line": "off",
     "import/prefer-default-export": "off",
     "linebreak-style": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "no-nested-ternary": "off",
+    "function-paren-newline": "off",
+    "react/jsx-props-no-spreading": "off"
     // "no-unused-vars": "off"
   },
   "settings": {
