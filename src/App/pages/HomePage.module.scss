@@ -1,12 +1,23 @@
-.products {
+.content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 75%;
+  align-items: flex-start;
 }
 
-.list {
+.items {
   display: flex;
+  align-items: flex-start;
+
   flex-wrap: wrap;
+  min-width: 70%;
+  width: 70%;
+}
+
+.filter {
+  min-width: 30%;
+  width: 30%;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
 }

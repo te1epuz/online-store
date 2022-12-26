@@ -14,11 +14,15 @@ function SearchInput({ query, setData, data }: TProps) {
       brand: [],
       search: '',
       sort: '',
+      price: '',
+      stock: '',
     };
+    params.price = '';
     params.sort = data.get('sort') || '';
     params.search = e.target.value || '';
     params.category = data.getAll('category');
     params.brand = data.getAll('brand');
+    params.stock = data.get('stock') || '';
 
     setData(params);
   };

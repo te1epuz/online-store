@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TProduct } from '../types/types';
-// import styles from './HomePage.module.scss';
+import styles from './HomePage.module.scss';
 import ProductList from '../components/ProductList';
 import CategoriesList from '../components/CategoriesList';
 import BrandsList from '../components/BrandList';
@@ -9,11 +9,16 @@ import { getAllCategories, getAllProducts } from '../services/productService';
 import countProducts from '../utils/countProducts';
 import SearchInput from '../components/SearchInput';
 import SelectSortBy from '../components/SelectSortBy';
+import DualSliderPrice from '../components/DualSliderPrice';
+import quickSort from '../utils/quickSort';
+import DualSliderStock from '../components/DualSliderStock';
 
 function HomePage() {
   const [products, setProducts] = useState<TProduct[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const brands = Array.from(new Set(products.map((i) => i.brand)));
+
+  const [isCopied, setIsCopied] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,8 +28,10 @@ function HomePage() {
   const brandsParams = searchParams.getAll('brand');
   const search = searchParams.get('search') || '';
   const sort = searchParams.get('sort') || '';
-
-  // console.log('sort', sort);
+  const price = searchParams.get('price') || '';
+  const stock = searchParams.get('stock') || '';
+  const priceArr = price.split('-');
+  const stockArr = stock.split('-');
 
   const getProducts = async () => {
     const dataProducts = await getAllProducts();
@@ -41,11 +48,16 @@ function HomePage() {
     setSearchParams({});
   };
 
+  const handleCopied = () => {
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 1000);
+  };
+
   const copyURL = () => {
     const text = window.location.href;
     navigator.clipboard
       .writeText(text)
-      .then(() => console.log('Async: Copying to clipboard was successful!'))
+      .then(() => handleCopied())
       .catch((err) => console.error('Async: Could not copy text: ', err));
   };
 
@@ -55,112 +67,99 @@ function HomePage() {
         .toLowerCase()
         .includes(search.toLowerCase()) &&
       (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
-      (brandsParams?.length ? brandsParams.includes(product.brand) : true)
+      (brandsParams?.length ? brandsParams.includes(product.brand) : true) &&
+      (priceArr.length !== 1 ? product.price >= +priceArr[0] && product.price <= +priceArr[1] : true) &&
+      (stockArr.length !== 1 ? product.stock >= +stockArr[0] && product.stock <= +stockArr[1] : true)
     ) {
       return true;
     }
     return false;
   });
 
-  // const filter = () => {
-  //   const textEqual = (item: TProduct) =>
-  //     item.title.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.category.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.description.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.brand.toLowerCase().includes(search.toLowerCase());
-
-  //   const filteredArr = products.filter((i) => {
-  //     if (categoriesParams?.length && brandsParams.length && search) {
-  //       return (
-  //         categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand) && textEqual(i)
-  //       );
-  //     }
-
-  //     if (categoriesParams?.length && brandsParams.length) {
-  //       return categoriesParams.some((j) => j === i.category) && brandsParams.some((j) => j === i.brand);
-  //     }
-
-  //     if (categoriesParams?.length && !brandsParams.length && search) {
-  //       return categoriesParams.some((j) => j === i.category) && textEqual(i);
-  //     }
-
-  //     if (!categoriesParams?.length && brandsParams.length && search) {
-  //       return brandsParams.some((j) => j === i.brand) && textEqual(i);
-  //     }
-
-  //     if (categoriesParams?.length) return categoriesParams.some((j) => j === i.category);
-  //     if (brandsParams.length) return brandsParams.some((j) => j === i.brand);
-  //     if (search) {
-  //       return textEqual(i);
-  //     }
-
-  //     return i;
-  //   });
-  //   return filteredArr;
-  // };
-
   const sortArr = (arr: TProduct[]) => {
     if (sort) {
       const [key, order] = sort.split('-') as ['price' | 'rating', string];
-      const sortedArr = arr.sort((a, b) => (order === 'asc' ? a[key] - b[key] : b[key] - a[key]));
+      const sortedArr = order === 'asc' ? quickSort(arr, key) : order === 'desc' ? quickSort(arr, key).reverse() : arr;
       return sortedArr;
     }
     return arr;
   };
 
-  // const filteredArr = filterArray();
-  // console.log('filteredArr:', filteredArr);
+  if (!isLoading) {
+    const sortedArr = sortArr(filteredArr);
+    const wholeCountCategories = countProducts(products, 'category');
+    const wholeCountBrands = countProducts(products, 'brand');
+    const maxPrice = quickSort(products, 'price')[products.length - 1].price;
+    const minPrice = quickSort(products, 'price')[0].price;
+    const maxStock = quickSort(products, 'stock')[products.length - 1].stock;
+    const minStock = quickSort(products, 'stock')[0].stock;
 
-  const sortedArr = sortArr(filteredArr);
-  // console.log('sortedArr', sortedArr);
-  const wholeCountCategories = countProducts(products, 'category');
-  const wholeCountBrands = countProducts(products, 'brand');
-  // console.log(wholeCountCategories);
-  // console.log(wholeCountBrands);
-
-  return !isLoading ? (
-    <div>
-      <h1>All products</h1>
-      <h2>Найдено: {filteredArr.length}</h2>
-      <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
-      <div className="content" style={{ display: 'flex' }}>
-        <div className="items" style={{ display: 'flex', flexWrap: 'wrap', minWidth: '1000px' }}>
-          <ProductList products={sortedArr} />
-        </div>
-        <div className="filter">
-          <button type="button" onClick={clearFilter}>
-            Сброс Фильтра
-          </button>
-          <button type="button" onClick={copyURL}>
-            Скопировать фильтр
-          </button>
+    return (
+      <>
+        <h1>All products</h1>
+        <div className={styles.options}>
+          <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
+          <h2>Found: {filteredArr.length}</h2>
           <SearchInput query={search} setData={setSearchParams} data={searchParams} />
-          <div className="categories">
-            <CategoriesList
-              products={filteredArr}
-              categories={categories}
-              query={categoriesParams}
-              setData={setSearchParams}
-              data={searchParams}
-              wholeCount={wholeCountCategories}
-            />
+        </div>
+        <div className={styles.content}>
+          <div className={styles.items}>
+            <ProductList products={sortedArr} />
           </div>
-          <div className="brands">
-            <BrandsList
-              products={filteredArr}
-              brands={brands}
-              query={brandsParams}
-              setData={setSearchParams}
-              data={searchParams}
-              wholeCount={wholeCountBrands}
-            />
+
+          <div className={styles.filter}>
+            <button type="button" onClick={clearFilter}>
+              Reset Filters
+            </button>
+            <button type="button" onClick={copyURL}>
+              {isCopied ? 'Copied' : 'Copy Link'}
+            </button>
+            <div className="categories">
+              <CategoriesList
+                products={filteredArr}
+                categories={categories}
+                query={categoriesParams}
+                setData={setSearchParams}
+                data={searchParams}
+                wholeCount={wholeCountCategories}
+              />
+            </div>
+            <div className="brands">
+              <BrandsList
+                products={filteredArr}
+                brands={brands}
+                query={brandsParams}
+                setData={setSearchParams}
+                data={searchParams}
+                wholeCount={wholeCountBrands}
+              />
+            </div>
+            <div className="stock">
+              <DualSliderStock
+                products={filteredArr}
+                query={stockArr}
+                setData={setSearchParams}
+                data={searchParams}
+                minStock={minStock}
+                maxStock={maxStock}
+              />
+            </div>
+            <div className="price">
+              <DualSliderPrice
+                products={filteredArr}
+                query={priceArr}
+                setData={setSearchParams}
+                data={searchParams}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  ) : (
-    <h1>Loading</h1>
-  );
+      </>
+    );
+  }
+  return <h1>Loading</h1>;
 }
 
 export default HomePage;
