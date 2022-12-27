@@ -95,25 +95,18 @@ function HomePage() {
     const minStock = quickSort(products, 'stock')[0].stock;
 
     return (
-      <>
-        <h1>All products</h1>
-        <div className={styles.options}>
-          <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
-          <h2>Found: {filteredArr.length}</h2>
+      <div className={styles.wrapper}>
+        <div className={styles.filters}>
+          <h1 className={styles.title}>Filters:</h1>
+          <p>Found: {filteredArr.length}</p>
+          <button type="button" onClick={clearFilter}>
+            Reset Filters
+          </button>
+          <button type="button" onClick={copyURL}>
+            {isCopied ? 'Copied' : 'Copy Link'}
+          </button>
           <SearchInput query={search} setData={setSearchParams} data={searchParams} />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.items}>
-            <ProductList products={sortedArr} />
-          </div>
-
-          <div className={styles.filter}>
-            <button type="button" onClick={clearFilter}>
-              Reset Filters
-            </button>
-            <button type="button" onClick={copyURL}>
-              {isCopied ? 'Copied' : 'Copy Link'}
-            </button>
+          <div>
             <div className="categories">
               <CategoriesList
                 products={filteredArr}
@@ -156,7 +149,16 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </>
+
+        <div className={styles.content}>
+          <div className={styles.sort_options}>
+            <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
+          </div>
+          <div className={styles.items}>
+            <ProductList products={sortedArr} />
+          </div>
+        </div>
+      </div>
     );
   }
   return <h1>Loading</h1>;

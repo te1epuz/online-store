@@ -1,1 +1,71 @@
-// here will be some styles
+.header__blackbar_wrapper {
+  width: 100%;
+  color: #fff;
+  background-color: black;
+  font-size: .8125rem;
+  line-height: .875rem;
+  padding: 1rem 0;
+
+}
+
+.header__blackbar {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.header__link {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navigation__link {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.header__link:hover,
+.navigation__link:hover {
+  color: #ababab;
+}
+
+.blackbar__text_greyed {
+color: #ababab;
+}
+
+.header__navigation {
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  max-height: 5.5rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  border-bottom: 0.0625rem solid #f1f1f1;
+}
+
+.logo__link {
+  width: 195px;
+  height: 53px;
+  background-image: url('../../img/online-store-logo.png');
+
+}
+
+.navigation__links {
+  flex: 1 0 auto;
+  max-width: 48.8125rem;
+  list-style: none;
+  display: flex;
+  font-size: 0.95rem;
+  justify-content: space-between;
+  line-height: 1.375rem;
+  padding-left: 50px;
+  padding-right: 50px;
+}
