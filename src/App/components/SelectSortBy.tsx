@@ -37,7 +37,7 @@ function SelectSortBy({ query, setData, data }: TProps) {
   return (
     <div>
       <label htmlFor="sort">
-        Sort by:
+        Sort by:&nbsp;
         <select name="sort" id="sort" onChange={(e) => handleChange(e)} value={query}>
           <option disabled value="">
             Choose...
