@@ -1,5 +1,6 @@
 import React from 'react';
 import { SetURLSearchParams, TQueryParams } from '../types/types';
+import styles from './SearchInput.module.scss';
 
 type TProps = {
   query: string;
@@ -28,10 +29,10 @@ function SearchInput({ query, setData, data }: TProps) {
   };
   return (
     <input
+      className={styles.searchbox}
       value={query}
       onChange={(e) => searchHandler(e)}
       placeholder="Search..."
-      style={{ width: '200px', padding: '8px 15px', fontSize: '16px' }}
       type="search"
       name="search"
     />

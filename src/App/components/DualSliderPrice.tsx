@@ -2,7 +2,6 @@ import ReactSlider from 'react-slider';
 import styles from './Slider.module.scss';
 import { SetURLSearchParams, TProduct, TQueryParams } from '../types/types';
 import quickSort from '../utils/quickSort';
-import listStyles from './main.module.scss';
 
 type TProps = {
   products: TProduct[];
@@ -37,24 +36,20 @@ function DualSliderPrice({ products, query, setData, data, maxPrice, minPrice }:
   };
 
   return (
-    <>
-      <h3 className={listStyles.title}>Price</h3>
-
-      <ReactSlider
-        className={styles.horizontal__slider}
-        thumbClassName={styles.thumb}
-        trackClassName={styles.track}
-        value={[min, max]}
-        ariaLabel={['Lower thumb', 'Upper thumb']}
-        ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
-        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-        min={minPrice}
-        max={maxPrice}
-        minDistance={5}
-        step={10}
-        onChange={(values) => handleChange(values)}
-      />
-    </>
+    <ReactSlider
+      className={styles.horizontal__slider}
+      thumbClassName={styles.thumb}
+      trackClassName={styles.track}
+      value={[min, max]}
+      ariaLabel={['Lower thumb', 'Upper thumb']}
+      ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
+      renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+      min={minPrice}
+      max={maxPrice}
+      minDistance={5}
+      step={10}
+      onChange={(values) => handleChange(values)}
+    />
   );
 }
 

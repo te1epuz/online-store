@@ -5,7 +5,6 @@
   font-size: .8125rem;
   line-height: .875rem;
   padding: 1rem 0;
-
 }
 
 .header__blackbar {
@@ -30,13 +29,12 @@
   transition: 0.2s;
 }
 
-.header__link:hover,
-.navigation__link:hover {
+.header__link:hover {
   color: #ababab;
 }
 
 .blackbar__text_greyed {
-color: #ababab;
+  color: #ababab;
 }
 
 .header__navigation {
@@ -52,10 +50,10 @@ color: #ababab;
 }
 
 .logo__link {
-  width: 195px;
-  height: 53px;
-  background-image: url('../../img/online-store-logo.png');
-
+  width: 201px;
+  height: 58px;
+  border-radius: 0.25rem;
+  background-image: url('../../img/logo.png');
 }
 
 .navigation__links {
@@ -68,4 +66,8 @@ color: #ababab;
   line-height: 1.375rem;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.navigation__link:hover {
+  color: rgb(82, 111, 251);
 }

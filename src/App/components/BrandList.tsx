@@ -1,7 +1,6 @@
 import { SetURLSearchParams, TProduct, TQueryParams } from '../types/types';
 import countProducts from '../utils/countProducts';
-import styles from './BrandList.module.scss';
-import listStyles from './main.module.scss';
+import listStyles from './listStyles.module.scss';
 
 type TProps = {
   products: TProduct[];
@@ -33,24 +32,34 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
   const currentCount = countProducts(products, 'brand');
 
   return (
-    <>
-      <h3 className={listStyles.title}>Brands</h3>
-      <ul className={listStyles.list}>
-        {brands.map((brand) => (
-          <button
-            key={brand}
-            className={`${listStyles.list__btn} ${query.includes(brand) ? styles.bgGreen : ''}`}
-            type="button"
-            onClick={() => handleClick(brand)}
-          >
-            {brand}
-            <span>
-              ({currentCount[brand] ? currentCount[brand] : 0}/{wholeCount[brand]})
-            </span>
-          </button>
+    <ul className={listStyles.list}>
+      {brands.sort().sort((a, b) => {
+        if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
+        return 0;
+      })
+        .map((brand) => (
+          <div className={listStyles.list__item} key={brand}>
+            <input
+              className={listStyles.item__checkbox}
+              type="checkbox"
+              id={brand}
+              name={brand}
+              value={brand}
+              checked={query.includes(brand)}
+              onChange={() => handleClick(brand)}
+            />
+            <label
+              className={`${listStyles.item__label} ${!currentCount[brand] ? listStyles.text_greyed : ''}`}
+              htmlFor={brand}
+            >
+              {brand}
+              <span className={listStyles.item__labelspan}>
+                ({currentCount[brand] ? currentCount[brand] : 0}/{wholeCount[brand]})
+              </span>
+            </label>
+          </div>
         ))}
-      </ul>
-    </>
+    </ul>
   );
 }
 

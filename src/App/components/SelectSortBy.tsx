@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { SetURLSearchParams, TQueryParams } from '../types/types';
 
 const sortOptions = [
-  { label: 'price ASC', value: 'price-asc' },
-  { label: 'price DESC', value: 'price-desc' },
-  { label: 'rating ASC', value: 'rating-asc' },
-  { label: 'rating DESC', value: 'rating-desc' },
+  { label: 'Price: Low to High', value: 'price-asc' },
+  { label: 'Price: High to Low', value: 'price-desc' },
+  { label: 'Rating: Low to High', value: 'rating-asc' },
+  { label: 'Rating: High to Low', value: 'rating-desc' },
 ];
 
 type TProps = {
@@ -31,7 +30,6 @@ function SelectSortBy({ query, setData, data }: TProps) {
     params.stock = data.get('stock') || '';
     params.price = data.get('price') || '';
 
-    // console.log('query', query);
     setData(params);
   };
   return (
@@ -39,10 +37,7 @@ function SelectSortBy({ query, setData, data }: TProps) {
       <label htmlFor="sort">
         Sort by:&nbsp;
         <select name="sort" id="sort" onChange={(e) => handleChange(e)} value={query}>
-          <option disabled value="">
-            Choose...
-          </option>
-          <option defaultValue="id-asc">Default</option>
+          {/* <option defaultValue="id-asc">Default</option> */}
           {sortOptions.map((option) => (
             <option key={option.label} value={option.value}>
               {option.label}

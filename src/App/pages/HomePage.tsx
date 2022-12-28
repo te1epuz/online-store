@@ -27,7 +27,7 @@ function HomePage() {
   const categoriesParams = searchParams.getAll('category');
   const brandsParams = searchParams.getAll('brand');
   const search = searchParams.get('search') || '';
-  const sort = searchParams.get('sort') || '';
+  const sort = searchParams.get('sort') || 'price-asc';
   const price = searchParams.get('price') || '';
   const stock = searchParams.get('stock') || '';
   const priceArr = price.split('-');
@@ -98,16 +98,18 @@ function HomePage() {
       <div className={styles.wrapper}>
         <div className={styles.filters}>
           <h1 className={styles.title}>Filters:</h1>
-          <p>Found: {filteredArr.length}</p>
-          <button type="button" onClick={clearFilter}>
-            Reset Filters
-          </button>
-          <button type="button" onClick={copyURL}>
-            {isCopied ? 'Copied' : 'Copy Link'}
-          </button>
+          <div className={styles.filter__buttons}>
+            <button className={styles.filter__button} type="button" onClick={clearFilter}>
+              Reset Filters
+            </button>
+            <button className={styles.filter__button} type="button" onClick={copyURL}>
+              {isCopied ? 'Copied' : 'Copy Link'}
+            </button>
+          </div>
           <SearchInput query={search} setData={setSearchParams} data={searchParams} />
           <div>
             <div className="categories">
+              <h3 className={styles.category_title}>Categories</h3>
               <CategoriesList
                 products={filteredArr}
                 categories={categories}
@@ -118,6 +120,7 @@ function HomePage() {
               />
             </div>
             <div className="brands">
+              <h3 className={styles.category_title}>Brands</h3>
               <BrandsList
                 products={filteredArr}
                 brands={brands}
@@ -128,6 +131,7 @@ function HomePage() {
               />
             </div>
             <div className="stock">
+              <h3 className={styles.category_title}>Stock quantity</h3>
               <DualSliderStock
                 products={filteredArr}
                 query={stockArr}
@@ -138,6 +142,7 @@ function HomePage() {
               />
             </div>
             <div className="price">
+              <h3 className={styles.category_title}>Price range</h3>
               <DualSliderPrice
                 products={filteredArr}
                 query={priceArr}
@@ -151,7 +156,8 @@ function HomePage() {
         </div>
 
         <div className={styles.content}>
-          <div className={styles.sort_options}>
+          <div className={styles.content__header}>
+            <h3 className={styles.text_greyed}>Found: {filteredArr.length}</h3>
             <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
           </div>
           <div className={styles.items}>

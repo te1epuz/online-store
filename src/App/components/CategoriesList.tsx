@@ -1,7 +1,6 @@
 import { SetURLSearchParams, TProduct, TQueryParams } from '../types/types';
 import countProducts from '../utils/countProducts';
-import styles from './CategoriesList.module.scss';
-import listStyles from './main.module.scss';
+import listStyles from './listStyles.module.scss';
 
 type TProps = {
   products: TProduct[];
@@ -34,25 +33,34 @@ function CategoriesList({ products, categories, query, setData, data, wholeCount
   const currentCount = countProducts(products, 'category');
 
   return (
-    <>
-      <h3 className={listStyles.title}>Categories</h3>
-
-      <ul className={listStyles.list}>
-        {categories.map((category) => (
-          <button
-            type="button"
-            className={`${listStyles.list__btn} ${query.includes(category) ? styles.bgRed : ''}`}
-            onClick={() => handleSelect(category)}
-            key={category}
-          >
-            {category}{' '}
-            <span>
-              ({currentCount[category] ? currentCount[category] : 0}/{wholeCount[category]})
-            </span>
-          </button>
+    <ul className={listStyles.list}>
+      {categories.sort().sort((a, b) => {
+        if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
+        return 0;
+      })
+        .map((category) => (
+          <div className={listStyles.list__item} key={category}>
+            <input
+              className={listStyles.item__checkbox}
+              type="checkbox"
+              id={category}
+              name={category}
+              value={category}
+              checked={query.includes(category)}
+              onChange={() => handleSelect(category)}
+            />
+            <label
+              className={`${listStyles.item__label} ${!currentCount[category] ? listStyles.text_greyed : ''}`}
+              htmlFor={category}
+            >
+              {category}
+              <span className={listStyles.item__labelspan}>
+                ({currentCount[category] ? currentCount[category] : 0}/{wholeCount[category]})
+              </span>
+            </label>
+          </div>
         ))}
-      </ul>
-    </>
+    </ul>
   );
 }
 
