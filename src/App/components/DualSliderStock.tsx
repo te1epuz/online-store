@@ -24,6 +24,7 @@ function DualSliderStock({ products, query, setData, data, maxStock, minStock }:
       sort: '',
       price: '',
       stock: '',
+      size: '',
     };
     params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
@@ -31,6 +32,7 @@ function DualSliderStock({ products, query, setData, data, maxStock, minStock }:
     params.brand = data.getAll('brand');
     params.price = '';
     params.stock = values.join('-') || '';
+    params.size = data.get('size') || 'big';
     setData(params);
   };
 

@@ -40,3 +40,9 @@ a {
 p {
   padding: 0px;
 }
+
+.card.v_small {
+  .disabled {
+    display: none;
+  }
+}

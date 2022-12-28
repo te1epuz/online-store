@@ -19,6 +19,7 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
       sort: '',
       price: '',
       stock: '',
+      size: '',
     };
     params.price = '';
     params.sort = data.get('sort') || '';
@@ -26,6 +27,7 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
     params.search = data.get('search') || '';
     params.brand = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
     params.stock = '';
+    params.size = data.get('size') || 'big';
 
     setData(params);
   };
@@ -33,10 +35,12 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
 
   return (
     <ul className={listStyles.list}>
-      {brands.sort().sort((a, b) => {
-        if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
-        return 0;
-      })
+      {brands
+        .sort()
+        .sort((a, b) => {
+          if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
+          return 0;
+        })
         .map((brand) => (
           <div className={listStyles.list__item} key={brand}>
             <input

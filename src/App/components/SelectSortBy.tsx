@@ -22,6 +22,7 @@ function SelectSortBy({ query, setData, data }: TProps) {
       sort: '',
       stock: '',
       price: '',
+      size: '',
     };
     params.search = data.get('search') || '';
     params.category = data.getAll('category');
@@ -29,7 +30,7 @@ function SelectSortBy({ query, setData, data }: TProps) {
     params.sort = e.target.value || '';
     params.stock = data.get('stock') || '';
     params.price = data.get('price') || '';
-
+    params.size = data.get('size') || 'big';
     setData(params);
   };
   return (
