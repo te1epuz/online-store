@@ -12,6 +12,7 @@ import SelectSortBy from '../components/SelectSortBy';
 import DualSliderPrice from '../components/DualSliderPrice';
 import quickSort from '../utils/quickSort';
 import DualSliderStock from '../components/DualSliderStock';
+import Size from '../components/Size';
 
 function HomePage() {
   const [products, setProducts] = useState<TProduct[]>([]);
@@ -30,6 +31,7 @@ function HomePage() {
   const sort = searchParams.get('sort') || 'price-asc';
   const price = searchParams.get('price') || '';
   const stock = searchParams.get('stock') || '';
+  const size = searchParams.get('size') || 'big';
   const priceArr = price.split('-');
   const stockArr = stock.split('-');
 
@@ -158,10 +160,11 @@ function HomePage() {
         <div className={styles.content}>
           <div className={styles.content__header}>
             <h3 className={styles.text_greyed}>Found: {filteredArr.length}</h3>
+            <Size data={searchParams} setData={setSearchParams} query={size} />
             <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
           </div>
           <div className={styles.items}>
-            <ProductList products={sortedArr} />
+            <ProductList products={sortedArr} size={size} />
           </div>
         </div>
       </div>

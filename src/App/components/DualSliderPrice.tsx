@@ -24,13 +24,14 @@ function DualSliderPrice({ products, query, setData, data, maxPrice, minPrice }:
       sort: '',
       price: '',
       stock: '',
+      size: '',
     };
     params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
     params.search = data.get('search') || '';
     params.brand = data.getAll('brand');
     params.stock = '';
-
+    params.size = data.get('size') || 'big';
     params.price = values.join('-');
     setData(params);
   };

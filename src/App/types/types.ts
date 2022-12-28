@@ -26,6 +26,7 @@ type TQueryParams = {
   sort: string;
   price: string;
   stock: string;
+  size: string;
 };
 
 type SetURLSearchParams = (

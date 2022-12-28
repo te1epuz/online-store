@@ -20,6 +20,7 @@ function CategoriesList({ products, categories, query, setData, data, wholeCount
       sort: '',
       price: '',
       stock: '',
+      size: '',
     };
     params.search = data.get('search') || '';
     params.price = '';
@@ -27,17 +28,19 @@ function CategoriesList({ products, categories, query, setData, data, wholeCount
     params.category = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
     params.brand = data.getAll('brand');
     params.stock = '';
-
+    params.size = data.get('size') || 'big';
     setData(params);
   };
   const currentCount = countProducts(products, 'category');
 
   return (
     <ul className={listStyles.list}>
-      {categories.sort().sort((a, b) => {
-        if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
-        return 0;
-      })
+      {categories
+        .sort()
+        .sort((a, b) => {
+          if (currentCount[a] > 0 && currentCount[b] === undefined) return -1;
+          return 0;
+        })
         .map((category) => (
           <div className={listStyles.list__item} key={category}>
             <input

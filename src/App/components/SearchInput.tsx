@@ -17,6 +17,7 @@ function SearchInput({ query, setData, data }: TProps) {
       sort: '',
       price: '',
       stock: '',
+      size: '',
     };
     params.price = '';
     params.sort = data.get('sort') || '';
@@ -24,7 +25,7 @@ function SearchInput({ query, setData, data }: TProps) {
     params.category = data.getAll('category');
     params.brand = data.getAll('brand');
     params.stock = data.get('stock') || '';
-
+    params.size = data.get('size') || 'big';
     setData(params);
   };
   return (
