@@ -1,0 +1,16 @@
+.searchbox {
+  width: 100%;
+  height: 35px;
+  padding: 8px 15px;
+  border: solid 1px #ababab;
+  border-radius: 0.25rem;
+}
+
+.searchbox:hover {
+  border: solid 1px rgb(82, 111, 251);
+}
+
+.searchbox:focus {
+  outline: none;
+  border: solid 1px rgb(82, 111, 251);
+}

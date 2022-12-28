@@ -6,8 +6,11 @@ import AddToCartBtn from './AddToCartBtn';
 function ProductCard({ data }: { data: TProduct }) {
   return (
     <div className={styles.card}>
-      <div>
-        <div className={styles.card__content} style={{ backgroundImage: `url(${data.thumbnail})` }}>
+      <Link to={`/product-details/${data.id}`}>
+        <div className={styles.card__content}>
+          <div className={styles.img__wrapper}>
+            <img className={styles.img} src={data.thumbnail} alt={data.title} />
+          </div>
           <h3>{data.title}</h3>
           <p>Categoty: {data.category}</p>
           <p>Brand: {data.brand}</p>
@@ -15,13 +18,13 @@ function ProductCard({ data }: { data: TProduct }) {
           <p>Discount: {data.discountPercentage}%</p>
           <p>Rating: {data.rating}</p>
           <p>Stock: {data.stock}</p>
-          <div className={styles.card__buttons}>
-            <Link to={`/product-details/${data.id}`}>
-              <button type="button">Details</button>
-            </Link>
-            <AddToCartBtn data={data} />
-          </div>
         </div>
+      </Link>
+      <div className={styles.card__buttons}>
+        <Link to={`/product-details/${data.id}`}>
+          <button type="button">Details</button>
+        </Link>
+        <AddToCartBtn data={data} />
       </div>
     </div>
   );
