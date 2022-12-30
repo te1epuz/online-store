@@ -1,9 +1,17 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { TProduct } from '../types/types';
 import styles from './ProductCard.module.scss';
 import AddToCartBtn from './AddToCartBtn';
 
-function ProductCard({ data, size }: { data: TProduct; size: string }) {
+type TProps = {
+  data: TProduct;
+  cart: TProduct[];
+  setCart: React.Dispatch<React.SetStateAction<TProduct[]>>;
+  size: string;
+};
+
+function ProductCard({ data, size, cart, setCart }: TProps) {
   return (
     <div className={`${styles.card} ${size === 'big' ? '' : styles.v_small}`}>
       <Link to={`/product-details/${data.id}`}>
@@ -26,7 +34,7 @@ function ProductCard({ data, size }: { data: TProduct; size: string }) {
         <Link to={`/product-details/${data.id}`}>
           <button type="button">Details</button>
         </Link>
-        <AddToCartBtn data={data} />
+        <AddToCartBtn data={data} cart={cart} setCart={setCart} />
       </div>
     </div>
   );

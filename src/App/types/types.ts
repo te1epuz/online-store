@@ -15,6 +15,10 @@ type TProduct = {
   title: string;
 };
 
+type TCart = TProduct & {
+  count: number;
+};
+
 type TResponse = {
   products: TProduct[];
 };
@@ -36,4 +40,4 @@ type SetURLSearchParams = (
   navigateOpts?: NavigateOptions,
 ) => void;
 
-export type { TProduct, TResponse, TQueryParams, SetURLSearchParams };
+export type { TProduct, TResponse, TQueryParams, SetURLSearchParams, TCart };
