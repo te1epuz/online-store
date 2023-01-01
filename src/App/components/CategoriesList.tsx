@@ -23,11 +23,11 @@ function CategoriesList({ products, categories, query, setData, data, wholeCount
       size: '',
     };
     params.search = data.get('search') || '';
-    params.price = '';
+    params.price = data.get('price') || '';
     params.sort = data.get('sort') || '';
     params.category = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
     params.brand = data.getAll('brand');
-    params.stock = '';
+    params.stock = data.get('stock') || '';
     params.size = data.get('size') || 'big';
     setData(params);
   };
