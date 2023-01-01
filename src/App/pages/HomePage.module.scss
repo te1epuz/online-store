@@ -53,11 +53,10 @@
   margin-bottom: 15px;
 }
 
-// .items {
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// }
+.display_buttons {
+  display: flex;
+  gap: 20px;
+}
 
 .items__big_grid {
   display: grid;

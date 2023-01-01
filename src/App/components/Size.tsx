@@ -31,10 +31,26 @@ function Size({ query, setData, data }: TProps) {
 
   return (
     <div className={styles.container__size}>
-      <button className={query === 'small' ? styles.size_active : ''} onClick={(e) => handleClick(e)} type="button">
+      <button
+        className={
+          `${styles.button}
+          ${styles.button_list}
+          ${query === 'small' ? styles.size_active : ''}`
+        }
+        onClick={(e) => handleClick(e)}
+        type="button"
+      >
         small
       </button>
-      <button className={query === 'big' ? styles.size_active : ''} onClick={(e) => handleClick(e)} type="button">
+      <button
+        className={
+          `${styles.button}
+          ${styles.button_grid}
+          ${query === 'big' ? styles.size_active : ''}`
+        }
+        onClick={(e) => handleClick(e)}
+        type="button"
+      >
         big
       </button>
     </div>
