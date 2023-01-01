@@ -1,5 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../Header';
+import Footer from '../Footer';
+
 import styles from './MainLayout.module.scss';
 
 function MainLayout() {
@@ -11,7 +13,7 @@ function MainLayout() {
           <Outlet />
         </div>
       </main>
-      <footer>(c)2022</footer>
+      <Footer />
     </>
   );
 }

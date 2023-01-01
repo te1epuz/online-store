@@ -1,6 +1,7 @@
 html {
   font-size: 16px;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
@@ -15,6 +16,12 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.375rem;
+  height: 100vh;
+}
+
+#root{
+  min-height: 100vh;
+  position: relative;
 }
 
 code {
