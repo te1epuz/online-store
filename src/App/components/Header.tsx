@@ -21,7 +21,12 @@ function Header() {
             <span>from 10:00 to 21:00</span>
           </li>
           <li>
-            <NavLink className={styles.header__link} to="/check_order">Check order?</NavLink>
+            <NavLink
+              className={`${styles.header__link} ${styles.link_disabled}`}
+              to="/check_order"
+              onClick={(event) => event.preventDefault()}
+            >Check order?
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -29,16 +34,31 @@ function Header() {
         <NavLink className={styles.logo__link} to="/" />
         <ul className={styles.navigation__links}>
           <li>
-            <NavLink className={styles.navigation__link} to="/about">About</NavLink>
+            <NavLink className={styles.navigation__link} to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/delivery">Delivery and payment</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/delivery"
+              onClick={(event) => event.preventDefault()}
+            >Delivery and payment
+            </NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/warranty">Warranty and returns</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/warranty"
+              onClick={(event) => event.preventDefault()}
+            >Warranty and returns
+            </NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/contacts">Contacts</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/contacts"
+              onClick={(event) => event.preventDefault()}
+            >Contacts
+            </NavLink>
           </li>
         </ul>
         <NavLink className={({ isActive }) => activeStyles(isActive)} to="/cart">

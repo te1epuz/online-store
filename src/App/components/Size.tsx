@@ -20,11 +20,11 @@ function Size({ query, setData, data }: TProps) {
       size: '',
     };
     params.search = data.get('search') || '';
-    params.price = '';
+    params.price = data.get('price') || '';
     params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
     params.brand = data.getAll('brand');
-    params.stock = '';
+    params.stock = data.get('stock') || '';
     params.size = e.currentTarget.textContent || '';
     setData(params);
   };
