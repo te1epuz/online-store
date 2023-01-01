@@ -32,7 +32,7 @@ function ProductCard({ data, size, cart, setCart }: TProps) {
       </Link>
       <div className={styles.card__buttons}>
         <Link to={`/product-details/${data.id}`}>
-          <button type="button">Details</button>
+          <button className={styles.card__button} type="button">Details</button>
         </Link>
         <AddToCartBtn data={data} cart={cart} setCart={setCart} />
       </div>

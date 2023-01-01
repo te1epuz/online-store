@@ -4,10 +4,10 @@ $gray: #dddddd;
 $white-blue: #83a9ff;
 
 .horizontal__slider {
-  width: 70%;
+  top: -10px;
+  width: 80%;
   max-width: 500px;
   height: 50px;
-  margin: auto;
   .track {
     top: 20px;
     height: 4px;
@@ -17,7 +17,7 @@ $white-blue: #83a9ff;
     width: 10px;
     outline: none;
     height: 10px;
-    line-height: 38px;
+    line-height: 48px;
   }
 }
 .thumb {
