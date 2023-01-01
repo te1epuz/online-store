@@ -19,14 +19,18 @@ function ProductCard({ data, size, cart, setCart }: TProps) {
           <div className={styles.img__wrapper}>
             <img className={styles.img} src={data.thumbnail} alt={data.title} />
           </div>
-          <h3>{data.title}</h3>
+          <div className={styles.price}>
+            <h3>{data.price}$</h3>
+            <p className={styles.text_rating}>Rating: {data.rating }</p>
+          </div>
+          <p className={styles.title}>{data.title}</p>
           <div className={styles.disabled}>
-            <p>Categoty: {data.category}</p>
-            <p>Brand: {data.brand}</p>
-            <p>Price: ${data.price}</p>
-            <p>Discount: {data.discountPercentage}%</p>
-            <p>Rating: {data.rating}</p>
-            <p>Stock: {data.stock}</p>
+            <p className={styles.text_greyed}>Categoty: {data.category}</p>
+            <p className={styles.text_greyed}>Brand: {data.brand}</p>
+            <p className={styles.text_greyed}>
+              <span>Discount: {data.discountPercentage}% | </span>
+              <span>Stock: {data.stock}</span>
+            </p>
           </div>
         </div>
       </Link>

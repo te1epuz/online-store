@@ -53,10 +53,17 @@
   margin-bottom: 15px;
 }
 
+// .items {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
+
 .items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-around;
+  grid-gap: 20px;
 }
 
 .text_greyed {

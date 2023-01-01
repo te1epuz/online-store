@@ -1,6 +1,7 @@
 .card {
   position: relative;
   width: 250px;
+  margin: auto;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -37,8 +38,25 @@ a {
   transform: scale(1.03);
 }
 
-p {
-  padding: 0px;
+.price {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: capitalize;
+}
+
+.text_greyed {
+  padding: 0;
+  margin: 0;
+  line-height: 1rem;
+  color: #ababab;
+  font-size: 0.9rem;
 }
 
 .card__buttons {
