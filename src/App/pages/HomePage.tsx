@@ -163,7 +163,7 @@ function HomePage() {
             <Size data={searchParams} setData={setSearchParams} query={size} />
             <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
           </div>
-          <div className={styles.items}>
+          <div className={`${size === 'big' ? styles.items__big_grid : styles.items__small_grid}`}>
             <ProductList products={sortedArr} size={size} />
           </div>
         </div>

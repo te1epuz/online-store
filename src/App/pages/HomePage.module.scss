@@ -59,11 +59,17 @@
 //   justify-content: space-between;
 // }
 
-.items {
+.items__big_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   justify-content: space-around;
   grid-gap: 20px;
+}
+
+.items__small_grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .text_greyed {
