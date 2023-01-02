@@ -160,10 +160,12 @@ function HomePage() {
         <div className={styles.content}>
           <div className={styles.content__header}>
             <h3 className={styles.text_greyed}>Found: {filteredArr.length}</h3>
-            <Size data={searchParams} setData={setSearchParams} query={size} />
-            <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
+            <div className={styles.display_buttons}>
+              <Size data={searchParams} setData={setSearchParams} query={size} />
+              <SelectSortBy query={sort} setData={setSearchParams} data={searchParams} />
+            </div>
           </div>
-          <div className={styles.items}>
+          <div className={`${size === 'big' ? styles.items__big_grid : styles.items__small_grid}`}>
             <ProductList products={sortedArr} size={size} />
           </div>
         </div>

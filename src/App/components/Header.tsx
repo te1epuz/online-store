@@ -1,9 +1,22 @@
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { TCart } from '../types/types';
 import styles from './Header.module.scss';
 
-function Header() {
-  const activeStyles = (bool: boolean) =>
-    bool ? styles.header__navigation__link__active : styles.header__navigation__link;
+type TProps = {
+  cart: TCart[];
+};
+
+function Header({ cart }: TProps) {
+  const [cartQuantity, setCartQuantity] = useState(0);
+  console.log('header loaded', cart);
+  useEffect(() => {
+    console.log('useEffect in header!');
+    const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
+    const totalPrice = countPrice(cart);
+    setCartQuantity(totalPrice);
+  }, [cart]);
+
   return (
     <header className={styles.header}>
       <div className={styles.header__blackbar_wrapper}>
@@ -21,7 +34,12 @@ function Header() {
             <span>from 10:00 to 21:00</span>
           </li>
           <li>
-            <NavLink className={styles.header__link} to="/check_order">Check order?</NavLink>
+            <NavLink
+              className={`${styles.header__link} ${styles.link_disabled}`}
+              to="/check_order"
+              onClick={(event) => event.preventDefault()}
+            >Check order?
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -29,20 +47,35 @@ function Header() {
         <NavLink className={styles.logo__link} to="/" />
         <ul className={styles.navigation__links}>
           <li>
-            <NavLink className={styles.navigation__link} to="/about">About</NavLink>
+            <NavLink className={styles.navigation__link} to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/delivery">Delivery and payment</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/delivery"
+              onClick={(event) => event.preventDefault()}
+            >Delivery and payment
+            </NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/warranty">Warranty and returns</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/warranty"
+              onClick={(event) => event.preventDefault()}
+            >Warranty and returns
+            </NavLink>
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/contacts">Contacts</NavLink>
+            <NavLink
+              className={`${styles.navigation__link} ${styles.link_disabled}`}
+              to="/contacts"
+              onClick={(event) => event.preventDefault()}
+            >Contacts
+            </NavLink>
           </li>
         </ul>
-        <NavLink className={({ isActive }) => activeStyles(isActive)} to="/cart">
-          Cart 🛒
+        <NavLink className={styles.cart_link} to="/cart">
+          Cart 🛒 Total price: {cartQuantity}$
         </NavLink>
       </nav>
     </header>

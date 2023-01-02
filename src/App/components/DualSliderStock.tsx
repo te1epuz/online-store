@@ -30,7 +30,7 @@ function DualSliderStock({ products, query, setData, data, maxStock, minStock }:
     params.category = data.getAll('category');
     params.search = data.get('search') || '';
     params.brand = data.getAll('brand');
-    params.price = '';
+    params.price = data.get('price') || '';
     params.stock = values.join('-') || '';
     params.size = data.get('size') || 'big';
     setData(params);

@@ -21,12 +21,12 @@ function BrandsList({ products, brands, query, setData, data, wholeCount }: TPro
       stock: '',
       size: '',
     };
-    params.price = '';
+    params.price = data.get('price') || '';
     params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
     params.search = data.get('search') || '';
     params.brand = query.includes(item) ? query.filter((i) => i !== item) : [...query, item];
-    params.stock = '';
+    params.stock = data.get('stock') || '';
     params.size = data.get('size') || 'big';
 
     setData(params);

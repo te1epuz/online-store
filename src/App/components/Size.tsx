@@ -20,21 +20,37 @@ function Size({ query, setData, data }: TProps) {
       size: '',
     };
     params.search = data.get('search') || '';
-    params.price = '';
+    params.price = data.get('price') || '';
     params.sort = data.get('sort') || '';
     params.category = data.getAll('category');
     params.brand = data.getAll('brand');
-    params.stock = '';
+    params.stock = data.get('stock') || '';
     params.size = e.currentTarget.textContent || '';
     setData(params);
   };
 
   return (
     <div className={styles.container__size}>
-      <button className={query === 'small' ? styles.size_active : ''} onClick={(e) => handleClick(e)} type="button">
+      <button
+        className={
+          `${styles.button}
+          ${styles.button_list}
+          ${query === 'small' ? styles.size_active : ''}`
+        }
+        onClick={(e) => handleClick(e)}
+        type="button"
+      >
         small
       </button>
-      <button className={query === 'big' ? styles.size_active : ''} onClick={(e) => handleClick(e)} type="button">
+      <button
+        className={
+          `${styles.button}
+          ${styles.button_grid}
+          ${query === 'big' ? styles.size_active : ''}`
+        }
+        onClick={(e) => handleClick(e)}
+        type="button"
+      >
         big
       </button>
     </div>

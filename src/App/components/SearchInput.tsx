@@ -19,7 +19,7 @@ function SearchInput({ query, setData, data }: TProps) {
       stock: '',
       size: '',
     };
-    params.price = '';
+    params.price = data.get('price') || '';
     params.sort = data.get('sort') || '';
     params.search = e.target.value || '';
     params.category = data.getAll('category');

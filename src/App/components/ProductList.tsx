@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { TProduct } from '../types/types';
+import React from 'react';
+import { useOutletContext } from 'react-router-dom';
+import { TCart, TProduct } from '../types/types';
 import ProductCard from './ProductCard';
-import { getCart } from '../services/localStorage.service';
 
 type TProps = {
   products: TProduct[];
@@ -9,8 +9,7 @@ type TProps = {
 };
 
 function ProductList({ products, size }: TProps) {
-  const [cart, setCart] = useState(getCart());
-
+  const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
   const filteredArr = products;
 
   if (!filteredArr.length) return <h1>No products found</h1>;

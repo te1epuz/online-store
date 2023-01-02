@@ -1,17 +1,23 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../Header';
+import Footer from '../Footer';
+
+import { getCart } from '../../services/localStorage.service';
+
 import styles from './MainLayout.module.scss';
 
 function MainLayout() {
+  const [cart, setCart] = useState(getCart());
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <main>
         <div className={styles.container}>
-          <Outlet />
+          <Outlet context={[cart, setCart]} />
         </div>
       </main>
-      <footer>(c)2022</footer>
+      <Footer />
     </>
   );
 }

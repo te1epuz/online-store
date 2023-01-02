@@ -42,6 +42,10 @@
   margin-bottom: 5px;
 }
 
+.content {
+  width: 100%;
+}
+
 .content__header {
   display: flex;
   justify-content: space-between;
@@ -49,10 +53,22 @@
   margin-bottom: 15px;
 }
 
-.items {
+.display_buttons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
+}
+
+.items__big_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-around;
+  grid-gap: 20px;
+}
+
+.items__small_grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .text_greyed {
