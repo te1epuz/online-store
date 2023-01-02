@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useOutletContext } from 'react-router-dom';
 import { getProductById } from '../services/productService';
-import { TProduct } from '../types/types';
-import { getCart } from '../services/localStorage.service';
+import { TCart, TProduct } from '../types/types';
 import AddToCartBtn from '../components/AddToCartBtn';
 import styles from './ProductDetails.module.scss';
 
@@ -10,7 +9,7 @@ function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState<TProduct | null | 'not found'>(null);
   const [currentImage, setCurrentImage] = useState<string>('');
-  const [cart, setCart] = useState(getCart());
+  const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
 
   async function getData() {
     const data = await getProductById(id);

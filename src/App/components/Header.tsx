@@ -8,11 +8,13 @@ type TProps = {
 };
 
 function Header({ cart }: TProps) {
-  const [cartQuantity, setCartQuantity] = useState(0);
+  const [cartTotalAmount, setCartTotalAmount] = useState(0);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
   useEffect(() => {
-    const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
-    const totalPrice = countPrice(cart);
-    setCartQuantity(totalPrice);
+    const totalPrice = cart.reduce((a, b) => a + b.price * b.count, 0);
+    setCartTotalPrice(totalPrice);
+    const totalAmount = cart.reduce((a, b) => a + b.count, 0);
+    setCartTotalAmount(totalAmount);
   }, [cart]);
 
   return (
@@ -25,7 +27,7 @@ function Header({ cart }: TProps) {
           </li>
           <li>
             <span className={styles.blackbar__text_greyed}>Phones: </span>
-            <span>+ХХХ ХХХ-ХХ-ХХ |+ХХХ ХХХ-ХХ-ХХ</span>
+            <span>+123 456-78-90 | +123 456-78-99</span>
           </li>
           <li>
             <span className={styles.blackbar__text_greyed}>Pick-up point: </span>
@@ -43,8 +45,10 @@ function Header({ cart }: TProps) {
         </ul>
       </div>
       <nav className={styles.header__navigation}>
-        <NavLink className={styles.logo__link} to="/" />
         <ul className={styles.navigation__links}>
+          <li>
+            <NavLink className={styles.logo__link} to="/" />
+          </li>
           <li>
             <NavLink className={styles.navigation__link} to="/">
               Home
@@ -77,10 +81,13 @@ function Header({ cart }: TProps) {
               Contacts
             </NavLink>
           </li>
+          <li>
+            <NavLink className={styles.cart__link} to="/cart">
+              {(cartTotalAmount === 0 ? <span>Cart is empty &nbsp; </span> :
+              <span>Items: {cartTotalAmount}<br />Total price: {cartTotalPrice}$</span>)}
+            </NavLink>
+          </li>
         </ul>
-        <NavLink className={styles.cart_link} to="/cart">
-          Cart 🛒 Total price: {cartQuantity}$
-        </NavLink>
       </nav>
     </header>
   );
