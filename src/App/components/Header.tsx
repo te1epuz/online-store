@@ -9,9 +9,7 @@ type TProps = {
 
 function Header({ cart }: TProps) {
   const [cartQuantity, setCartQuantity] = useState(0);
-  console.log('header loaded', cart);
   useEffect(() => {
-    console.log('useEffect in header!');
     const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
     const totalPrice = countPrice(cart);
     setCartQuantity(totalPrice);
@@ -38,7 +36,8 @@ function Header({ cart }: TProps) {
               className={`${styles.header__link} ${styles.link_disabled}`}
               to="/check_order"
               onClick={(event) => event.preventDefault()}
-            >Check order?
+            >
+              Check order?
             </NavLink>
           </li>
         </ul>
@@ -47,14 +46,17 @@ function Header({ cart }: TProps) {
         <NavLink className={styles.logo__link} to="/" />
         <ul className={styles.navigation__links}>
           <li>
-            <NavLink className={styles.navigation__link} to="/">Home</NavLink>
+            <NavLink className={styles.navigation__link} to="/">
+              Home
+            </NavLink>
           </li>
           <li>
             <NavLink
               className={`${styles.navigation__link} ${styles.link_disabled}`}
               to="/delivery"
               onClick={(event) => event.preventDefault()}
-            >Delivery and payment
+            >
+              Delivery and payment
             </NavLink>
           </li>
           <li>
@@ -62,7 +64,8 @@ function Header({ cart }: TProps) {
               className={`${styles.navigation__link} ${styles.link_disabled}`}
               to="/warranty"
               onClick={(event) => event.preventDefault()}
-            >Warranty and returns
+            >
+              Warranty and returns
             </NavLink>
           </li>
           <li>
@@ -70,7 +73,8 @@ function Header({ cart }: TProps) {
               className={`${styles.navigation__link} ${styles.link_disabled}`}
               to="/contacts"
               onClick={(event) => event.preventDefault()}
-            >Contacts
+            >
+              Contacts
             </NavLink>
           </li>
         </ul>

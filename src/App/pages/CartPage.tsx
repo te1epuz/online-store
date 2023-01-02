@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 
-import { forceItemsToCart, getCart, removeItem } from '../services/localStorage.service';
+import { forceItemsToCart, removeItem } from '../services/localStorage.service';
 import { TCart } from '../types/types';
 import Counter from '../components/Counter';
 import { paginate } from '../utils/paginate';
 import Pagination from '../components/Pagination';
+import styles from './Cart.module.scss';
 
 function CartPage() {
-  const [cart, setCart] = useState(getCart() as TCart[]);
-  const [itemsOnPage, setItemsOnPage] = useState(4);
-  const [currentPage, setCurrentpage] = useState(1);
+  const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const limit = searchParams.getAll('limit').includes('0') ? ['4'] : searchParams.getAll('limit');
+  const pageQuery = searchParams.getAll('page').includes('0') ? ['1'] : searchParams.getAll('page');
+
+  const [itemsOnPage, setItemsOnPage] = useState(+limit[0] || 4);
+  const [currentPage, setCurrentpage] = useState(+pageQuery[0] || 1);
+
   const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
   const [totalPrice, setTotalprice] = useState(countPrice(cart));
-  console.log(cart);
+
   const handleIncrement = (id: number) => {
     const productIndex = cart.findIndex((item) => item.id === id);
     const newArr = [...cart];
@@ -21,12 +29,10 @@ function CartPage() {
     setTotalprice(countPrice(newArr));
     forceItemsToCart(newArr);
   };
-  useEffect(() => {
-    setCurrentpage(1);
-  }, [cart]);
 
   const handlePageChange = (page: number) => {
     setCurrentpage(page);
+    setSearchParams({ limit, page: page.toString() });
   };
 
   const handleDecrement = (id: number) => {
@@ -43,29 +49,51 @@ function CartPage() {
       forceItemsToCart(newArr);
     }
   };
+  const itemsCrop = paginate(cart, currentPage, itemsOnPage);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemsOnPage(!+e.currentTarget.value ? 1 : +e.currentTarget.value);
+    console.log(itemsCrop.length);
+    setItemsOnPage(
+      !+e.currentTarget.value ? 1 : +e.currentTarget.value > cart.length ? cart.length : +e.currentTarget.value,
+    );
+    setSearchParams({ limit: e.currentTarget.value, page: pageQuery });
+    if (+e.currentTarget.value === itemsCrop.length) setCurrentpage(1);
   };
 
   const handleTotalItemPrice = (price: TCart['price'], count: TCart['count']) => price * count;
-  const itemsCrop = paginate(cart, currentPage, itemsOnPage);
   const itemsCount = cart.length;
+  useEffect(() => {
+    if (itemsCrop.length === 0) setCurrentpage((prev) => prev - 1);
+    if (itemsCrop.length === 0) setCurrentpage(Math.ceil(cart.length / itemsOnPage));
+    setSearchParams({ limit, page: currentPage.toString() });
+  }, [cart, itemsOnPage, currentPage]);
+
+  if (!cart.length) {
+    return <h2>OOPS, your cart is empty :(</h2>;
+  }
   return (
     <>
       <h1>Cart</h1>
       <h2>TOTAL PRICE OF MY CART: ${totalPrice.toFixed(2)} ЪУЪ</h2>
-      <p>Items on PAGE :</p> <input type="number" value={itemsOnPage} onChange={(e) => handleChange(e)} />
+      <p>Items on PAGE :</p>{' '}
+      <input
+        className={styles.cart_input}
+        type="number"
+        max={itemsCount}
+        value={itemsOnPage}
+        onChange={(e) => handleChange(e)}
+      />
       <Pagination
         pageSize={itemsOnPage}
         itemsCount={itemsCount}
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
-      {!cart.length ? <h2>OOPS, your cart is empty :(</h2> : null}
       <div className="cart_items">
-        {itemsCrop.map((item) => (
+        {itemsCrop.map((item, index) => (
           <Counter
             key={item.id}
+            listId={index + 1 + (currentPage - 1) * itemsOnPage}
             onIncrement={handleIncrement}
             onDecrement={handleDecrement}
             totalItemPrice={handleTotalItemPrice(item.price, item.count)}
