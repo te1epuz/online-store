@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { addToCart, removeItem } from '../services/localStorage.service';
-import { TProduct } from '../types/types';
+import { TCart, TProduct } from '../types/types';
 
 import styles from './AddToCartBtn.module.scss';
 
 type TProps = {
   data: TProduct;
-  cart: TProduct[];
-  setCart: React.Dispatch<React.SetStateAction<TProduct[]>>;
+  cart: TCart[];
+  setCart: React.Dispatch<React.SetStateAction<TCart[]>>;
 };
 
 function AddToCartBtn({ data, cart, setCart }: TProps) {
@@ -18,8 +18,9 @@ function AddToCartBtn({ data, cart, setCart }: TProps) {
   // console.log('render');
   const handleCLick = () => {
     if (!cart.some((item) => item.id === data.id)) {
-      setCart((prev) => [...prev, data]);
+      setCart((prev) => [...prev, { ...data, count: 1 }]);
       addToCart(data);
+      console.log(cart);
     } else {
       setCart((prev) => prev.filter((item) => item.id !== data.id));
       removeItem(data.id);

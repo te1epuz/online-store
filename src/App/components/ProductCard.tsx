@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TProduct } from '../types/types';
+import { TCart, TProduct } from '../types/types';
 import styles from './ProductCard.module.scss';
 import AddToCartBtn from './AddToCartBtn';
 
 type TProps = {
   data: TProduct;
-  cart: TProduct[];
-  setCart: React.Dispatch<React.SetStateAction<TProduct[]>>;
+  cart: TCart[];
+  setCart: React.Dispatch<React.SetStateAction<TCart[]>>;
   size: string;
 };
 

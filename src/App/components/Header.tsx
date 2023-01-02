@@ -1,9 +1,22 @@
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { TCart } from '../types/types';
 import styles from './Header.module.scss';
 
-function Header() {
-  const activeStyles = (bool: boolean) =>
-    bool ? styles.header__navigation__link__active : styles.header__navigation__link;
+type TProps = {
+  cart: TCart[];
+};
+
+function Header({ cart }: TProps) {
+  const [cartQuantity, setCartQuantity] = useState(0);
+  console.log('header loaded', cart);
+  useEffect(() => {
+    console.log('useEffect in header!');
+    const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
+    const totalPrice = countPrice(cart);
+    setCartQuantity(totalPrice);
+  }, [cart]);
+
   return (
     <header className={styles.header}>
       <div className={styles.header__blackbar_wrapper}>
@@ -61,8 +74,8 @@ function Header() {
             </NavLink>
           </li>
         </ul>
-        <NavLink className={({ isActive }) => activeStyles(isActive)} to="/cart">
-          Cart 🛒
+        <NavLink className={styles.cart_link} to="/cart">
+          Cart 🛒 Total price: {cartQuantity}$
         </NavLink>
       </nav>
     </header>
