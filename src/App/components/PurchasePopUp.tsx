@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { clearLocaleStorageCart } from '../services/localStorage.service';
 import { TCart } from '../types/types';
 import styles from './PurchasePopUp.module.scss';
 
@@ -20,6 +21,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       clearInterval(count);
       setIsPurchasePopUpEnabled(false);
       setCart([]);
+      clearLocaleStorageCart();
       navigate('..');
     }, 4000);
   }
