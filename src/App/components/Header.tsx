@@ -84,7 +84,7 @@ function Header({ cart }: TProps) {
           <li>
             <NavLink className={styles.cart__link} to="/cart">
               {(cartTotalAmount === 0 ? <span>Cart is empty &nbsp; </span> :
-              <span>Items: {cartTotalAmount}<br />Total price: {cartTotalPrice}$</span>)}
+              <span>Items: {cartTotalAmount}<br />Total price: ${cartTotalPrice}</span>)}
             </NavLink>
           </li>
         </ul>

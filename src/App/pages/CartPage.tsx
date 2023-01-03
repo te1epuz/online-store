@@ -7,6 +7,8 @@ import Counter from '../components/Counter';
 import { paginate } from '../utils/paginate';
 import Pagination from '../components/Pagination';
 import styles from './Cart.module.scss';
+import CartSummary from '../components/CartSummary';
+import PurchasePopUp from '../components/PurchasePopUp';
 
 function CartPage() {
   const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
@@ -20,6 +22,10 @@ function CartPage() {
 
   const countPrice = (array: TCart[]) => array.reduce((a, b) => a + b.price * b.count, 0);
   const [totalPrice, setTotalprice] = useState(countPrice(cart));
+  const countItems = (array: TCart[]) => array.reduce((a, b) => a + b.count, 0);
+  const [totalItems, setTotalItems] = useState(countItems(cart));
+
+  const [isPurchasePopUpEnabled, setIsPurchasePopUpEnabled] = useState(false);
 
   const handleIncrement = (id: number) => {
     const productIndex = cart.findIndex((item) => item.id === id);
@@ -27,6 +33,7 @@ function CartPage() {
     newArr[productIndex].count += 1;
     setCart(newArr);
     setTotalprice(countPrice(newArr));
+    setTotalItems(countItems(newArr));
     forceItemsToCart(newArr);
   };
 
@@ -42,10 +49,12 @@ function CartPage() {
     if (newArr[productIndex].count <= 0) {
       setCart((prev) => prev.filter((i) => i.id !== id));
       setTotalprice(countPrice(newArr));
+      setTotalItems(countItems(newArr));
       removeItem(id);
     } else {
       setCart(newArr);
       setTotalprice(countPrice(newArr));
+      setTotalItems(countItems(newArr));
       forceItemsToCart(newArr);
     }
   };
@@ -89,18 +98,27 @@ function CartPage() {
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
-      <div className="cart_items">
-        {itemsCrop.map((item, index) => (
-          <Counter
-            key={item.id}
-            listId={index + 1 + (currentPage - 1) * itemsOnPage}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-            totalItemPrice={handleTotalItemPrice(item.price, item.count)}
-            {...item}
-          />
-        ))}
+      <div>
+        <div className="cart_items">
+          {itemsCrop.map((item, index) => (
+            <Counter
+              key={item.id}
+              listId={index + 1 + (currentPage - 1) * itemsOnPage}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+              totalItemPrice={handleTotalItemPrice(item.price, item.count)}
+              {...item}
+            />
+          ))}
+        </div>
+        <CartSummary
+          setIsPurchasePopUpEnabled={setIsPurchasePopUpEnabled}
+          totalItems={totalItems}
+          totalPrice={totalPrice}
+        />
       </div>
+      {isPurchasePopUpEnabled === true
+        ? <PurchasePopUp setIsPurchasePopUpEnabled={setIsPurchasePopUpEnabled} setCart={setCart} /> : ''}
     </>
   );
 }

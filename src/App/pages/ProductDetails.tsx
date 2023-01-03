@@ -72,7 +72,7 @@ function ProductDetails() {
           <p><span className={styles.text_greyed}>Rating:</span> {product.rating}</p>
           <p><span className={styles.text_greyed}>Stock:</span> {product.stock}</p>
           <p><span className={styles.text_greyed}>Discount:</span> {product.discountPercentage}%</p>
-          <h2 className={styles.price}>Price: {product.price}$</h2>
+          <h2 className={styles.price}>Price: ${product.price}</h2>
           <div className={styles.buttons}>
             <AddToCartBtn data={product} cart={cart} setCart={setCart} />
             <button type="button">TODO buy now button</button>
