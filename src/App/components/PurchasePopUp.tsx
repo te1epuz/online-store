@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { clearLocaleStorageCart } from '../services/localStorage.service';
 import { TCart } from '../types/types';
 import styles from './PurchasePopUp.module.scss';
@@ -13,6 +13,12 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
   const [isPayed, setIsPayed] = useState(false);
   const [countDown, setCountDown] = useState(4);
   const navigate = useNavigate();
+  const [,,, setIsFastBuy] = useOutletContext<[
+    null,
+    null,
+    null,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]>();
 
   function handleConfirm() {
     setIsPayed(true);
@@ -22,6 +28,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       setIsPurchasePopUpEnabled(false);
       setCart([]);
       clearLocaleStorageCart();
+      setIsFastBuy(false);
       navigate('..');
     }, 4000);
   }
@@ -30,7 +37,10 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       <button
         className={styles.background}
         type="button"
-        onClick={() => setIsPurchasePopUpEnabled(false)}
+        onClick={() => {
+          setIsFastBuy(false);
+          setIsPurchasePopUpEnabled(false);
+        }}
       >close popup
       </button>
       <div className={styles.mainwindow}>

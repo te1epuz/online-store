@@ -9,12 +9,13 @@ import styles from './MainLayout.module.scss';
 
 function MainLayout() {
   const [cart, setCart] = useState(getCart());
+  const [isFastBuy, setIsFastBuy] = useState(false);
   return (
     <>
       <Header cart={cart} />
       <main>
         <div className={styles.container}>
-          <Outlet context={[cart, setCart]} />
+          <Outlet context={[cart, setCart, isFastBuy, setIsFastBuy]} />
         </div>
       </main>
       <Footer />

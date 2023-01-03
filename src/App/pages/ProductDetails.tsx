@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useOutletContext } from 'react-router-dom';
+import { Link, useParams, useOutletContext, useNavigate } from 'react-router-dom';
 import { getProductById } from '../services/productService';
 import { TCart, TProduct } from '../types/types';
 import AddToCartBtn from '../components/AddToCartBtn';
+import { addToCart } from '../services/localStorage.service';
 import styles from './ProductDetails.module.scss';
 
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState<TProduct | null | 'not found'>(null);
   const [currentImage, setCurrentImage] = useState<string>('');
-  const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
+  const [cart, setCart,, setIsFastBuy] = useOutletContext<[
+    TCart[],
+    React.Dispatch<React.SetStateAction<TCart[]>>,
+    null,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]>();
 
   async function getData() {
     const data = await getProductById(id);
@@ -27,6 +33,19 @@ function ProductDetails() {
   function changeCurrentImage(imageLink: string) {
     setCurrentImage(imageLink);
     // TODO добавить изменение стилей для списка картинок с выделением текущей
+  }
+
+  const navigate = useNavigate();
+
+  function handleBuyNow() {
+    if (product !== null && product !== 'not found') {
+      if (!cart.some((item) => item.id === product.id)) {
+        setCart((prev) => [...prev, { ...product, count: 1 }]);
+        addToCart(product);
+      }
+    }
+    setIsFastBuy(true);
+    navigate('../cart');
   }
 
   if (product !== null && product === 'not found') {
@@ -75,12 +94,18 @@ function ProductDetails() {
           <h2 className={styles.price}>Price: ${product.price}</h2>
           <div className={styles.buttons}>
             <AddToCartBtn data={product} cart={cart} setCart={setCart} />
-            <button type="button">TODO buy now button</button>
+            <button
+              className={styles.button__buynow}
+              onClick={handleBuyNow}
+              type="button"
+            >Buy Now
+            </button>
           </div>
-          <p className={styles.text_small}>*Shipping: International Priority Shipping via Global Shipping Program
+          <p className={styles.text_small}>* Buy Now option will instantly redirect You to Check Out, be carefull</p>
+          <p className={styles.text_small}>** Shipping: International Priority Shipping via Global Shipping Program
             | <a href="http://" onClick={(event) => event.preventDefault()}>See details</a>
           </p>
-          <p className={styles.text_small}>**For shipping Located in: Philadelphia, Pennsylvania, United States
+          <p className={styles.text_small}>*** For shipping Located in: Philadelphia, Pennsylvania, United States
             Buyer pays for return shipping |&nbsp;
             <a href="http://" onClick={(event) => event.preventDefault()}>See details</a>
           </p>

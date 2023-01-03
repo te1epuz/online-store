@@ -11,7 +11,11 @@ import CartSummary from '../components/CartSummary';
 import PurchasePopUp from '../components/PurchasePopUp';
 
 function CartPage() {
-  const [cart, setCart] = useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>]>();
+  const [cart, setCart, isFastBuy] = useOutletContext<[
+    TCart[],
+    React.Dispatch<React.SetStateAction<TCart[]>>,
+    boolean
+  ]>();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const limit = searchParams.getAll('limit').includes('0') ? ['4'] : searchParams.getAll('limit');
@@ -26,6 +30,10 @@ function CartPage() {
   const [totalItems, setTotalItems] = useState(countItems(cart));
 
   const [isPurchasePopUpEnabled, setIsPurchasePopUpEnabled] = useState(false);
+
+  useEffect(() => {
+    if (isFastBuy) setIsPurchasePopUpEnabled(true);
+  }, []);
 
   const handleIncrement = (id: number) => {
     const productIndex = cart.findIndex((item) => item.id === id);
