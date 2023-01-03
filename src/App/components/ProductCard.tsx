@@ -21,7 +21,7 @@ function ProductCard({ data, size, cart, setCart }: TProps) {
               <img className={styles.img} src={data.thumbnail} alt={data.title} />
             </div>
             <div className={styles.price}>
-              <h3>{data.price}$</h3>
+              <h3>${data.price}</h3>
               <p className={styles.text_rating}>Rating: {data.rating }</p>
             </div>
             <p className={styles.title}>{data.title}</p>
@@ -52,7 +52,7 @@ function ProductCard({ data, size, cart, setCart }: TProps) {
             <img className={styles.img} src={data.thumbnail} alt={data.title} />
           </div>
           <div>
-            <h3 className={styles.title}>{data.price}$</h3>
+            <h3 className={styles.title}>${data.price}</h3>
             <h3 className={styles.title}>{data.title}</h3>
             <p className={styles.text_rating}>Rating: {data.rating }</p>
             <span className={styles.text_greyed}>

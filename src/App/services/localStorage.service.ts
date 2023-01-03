@@ -30,4 +30,8 @@ const forceItemsToCart = (arr: TCart[]) => {
 const getCart = (): TCart[] =>
   localStorage.getItem('myCart') ? JSON.parse(localStorage.getItem('myCart') || '') : [];
 
-export { addToCart, getCart, removeItem, forceItemsToCart };
+function clearLocaleStorageCart() {
+  localStorage.setItem('myCart', '[]');
+}
+
+export { addToCart, getCart, removeItem, forceItemsToCart, clearLocaleStorageCart };

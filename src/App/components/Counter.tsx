@@ -36,6 +36,10 @@ function Counter({ totalItemPrice, listId, onIncrement, onDecrement, ...rest }: 
       </div>
       <div className={styles.card__controls}>
         <div className={styles.card__buttons}>
+          <button className={styles.control_btn} onClick={handleDecrement} type="button">
+            -
+          </button>
+          <p>{rest.count}</p>
           <button
             className={styles.control_btn}
             disabled={rest.count >= rest.stock}
@@ -43,10 +47,6 @@ function Counter({ totalItemPrice, listId, onIncrement, onDecrement, ...rest }: 
             type="button"
           >
             +
-          </button>
-          <p>{rest.count}</p>
-          <button className={styles.control_btn} onClick={handleDecrement} type="button">
-            -
           </button>
         </div>
         <div className={styles.total}>Total price: ${totalItemPrice}</div>
