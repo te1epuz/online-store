@@ -20,7 +20,6 @@ function AddToCartBtn({ data, cart, setCart }: TProps) {
     if (!cart.some((item) => item.id === data.id)) {
       setCart((prev) => [...prev, { ...data, count: 1 }]);
       addToCart(data);
-      console.log(cart);
     } else {
       setCart((prev) => prev.filter((item) => item.id !== data.id));
       removeItem(data.id);

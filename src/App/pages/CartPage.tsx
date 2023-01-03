@@ -61,7 +61,7 @@ function CartPage() {
   const itemsCrop = paginate(cart, currentPage, itemsOnPage);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(itemsCrop.length);
+    // console.log(itemsCrop.length);
     setItemsOnPage(
       !+e.currentTarget.value ? 1 : +e.currentTarget.value > cart.length ? cart.length : +e.currentTarget.value,
     );
