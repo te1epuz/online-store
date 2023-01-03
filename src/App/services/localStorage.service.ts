@@ -34,4 +34,17 @@ function clearLocaleStorageCart() {
   localStorage.setItem('myCart', '[]');
 }
 
-export { addToCart, getCart, removeItem, forceItemsToCart, clearLocaleStorageCart };
+function getLocaleStoragePromo(): string[] {
+  return localStorage.getItem('promoCodes') ? JSON.parse(localStorage.getItem('promoCodes') || '') : [];
+}
+
+function setLocaleStoragePromo(discounts: string[]) {
+  localStorage.setItem('promoCodes', JSON.stringify(discounts));
+}
+
+function clearLocaleStoragePromo() {
+  localStorage.setItem('promoCodes', '[]');
+}
+
+export { addToCart, getCart, removeItem, forceItemsToCart,
+  clearLocaleStorageCart, getLocaleStoragePromo, setLocaleStoragePromo, clearLocaleStoragePromo };
