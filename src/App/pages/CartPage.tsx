@@ -6,7 +6,7 @@ import { TCart } from '../types/types';
 import Counter from '../components/Counter';
 import { paginate } from '../utils/paginate';
 import Pagination from '../components/Pagination';
-import styles from './Cart.module.scss';
+import styles from './CartPage.module.scss';
 import CartSummary from '../components/CartSummary';
 import PurchasePopUp from '../components/PurchasePopUp';
 
@@ -98,7 +98,7 @@ function CartPage() {
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
-      <div>
+      <div className={styles.wrapper}>
         <div className="cart_items">
           {itemsCrop.map((item, index) => (
             <Counter

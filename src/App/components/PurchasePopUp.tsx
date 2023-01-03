@@ -41,10 +41,10 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
         <div>purchase popup window</div>
         <div>purchase popup window</div>
         <div>purchase popup window</div>
-        <button type="button" onClick={handleConfirm} disabled={isPayed}>
-          {isPayed ? 'Done' : 'Confirm'}
+        <button type="button" className={styles.button__confirm} onClick={handleConfirm} disabled={isPayed}>
+          {isPayed ? 'Done ✔️' : 'Confirm'}
         </button>
-        {isPayed ? <div>redirecting in {countDown}...</div> : <div>*press to confirm</div>}
+        {isPayed ? <div>redirecting in {countDown}...</div> : <div>*press to finish</div>}
       </div>
     </div>
   );
