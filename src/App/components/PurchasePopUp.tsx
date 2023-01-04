@@ -11,6 +11,7 @@ type TProps = {
 
 function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
   const [isPayed, setIsPayed] = useState(false);
+  const [isAllValid, setIsAllValid] = useState(false);
   const [countDown, setCountDown] = useState(4);
   const navigate = useNavigate();
   const [,,, setIsFastBuy] = useOutletContext<[
@@ -83,6 +84,9 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       newFormObj.email.isValid = false;
     }
     setFormText(newFormObj);
+    const allKeys = Object.keys(newFormObj);
+    const isAllReallyValid = allKeys.every((key) => newFormObj[key as keyof typeof newFormObj].isValid);
+    setIsAllValid(isAllReallyValid);
   }, [formText.name.value, formText.phone.value, formText.adress.value, formText.email.value]);
 
   return (
@@ -99,7 +103,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       <form className={styles.mainwindow} onSubmit={handleConfirm}>
         <div>Name:</div>
         <input
-          placeholder="input First Name and Last Name"
+          placeholder="First Name and Last Name"
           value={formText.name.value}
           onChange={(event) => {
             const newFormObj = { ...formText };
@@ -111,7 +115,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           <div>invalid input, must be at least 2 words, 3 letters each</div> : ''}
         <div>Phone:</div>
         <input
-          placeholder="input phone here"
+          placeholder="phone number"
           value={formText.phone.value}
           onChange={(event) => {
             const newFormObj = { ...formText };
@@ -123,7 +127,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           <div>invalid input, must start with &apos;+&apos; and be more than 9 numbers long</div> : ''}
         <div>Adress:</div>
         <textarea
-          placeholder="input adress here"
+          placeholder="adress"
           value={formText.adress.value}
           onChange={(event) => {
             const newFormObj = { ...formText };
@@ -135,7 +139,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           <div>invalid input, must be at least 3 words, 5 letters each</div> : ''}
         <div>E-mail:</div>
         <input
-          placeholder="input e-mail here"
+          placeholder="e-mail"
           value={formText.email.value}
           onChange={(event) => {
             const newFormObj = { ...formText };
@@ -147,7 +151,9 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           <div>invalid input, must be e-mail adress</div> : ''}
 
         <div>Bank Card: NOT DONE</div>
-        <div>FINAL VALIDATION NOT DONE</div>
+        <div>is all form data valid? {isAllValid.toString()}</div>
+        <div>button active at all times for test purpuse only</div>
+        {/* <button type="submit" className={styles.button__confirm} disabled={isPayed || !isAllValid}> */}
         <button type="submit" className={styles.button__confirm} disabled={isPayed}>
           {isPayed ? 'Done ✔️' : 'Confirm'}
         </button>
