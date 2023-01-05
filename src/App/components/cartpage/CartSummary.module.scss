@@ -36,17 +36,18 @@
   margin: 0 auto;
   width: 120px;
   height: 35px;
-  border: solid 1px #ababab;
   border-radius: 0.25rem;
   cursor: pointer;
   transition: 0.1s;
-  background: white;
+  color: white;
+  background: rgb(82, 111, 251);
+  border: solid 1px rgb(82, 111, 251);
 }
 
 .button__buy:hover {
   color: white;
-  background: rgb(82, 111, 251);
-  border: solid 1px rgb(82, 111, 251);
+  background: rgb(50, 84, 251);
+  border: solid 1px rgb(50, 84, 251);
 }
 
 .crossed_out {

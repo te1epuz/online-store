@@ -30,7 +30,7 @@ function DiscountForm({ discounts, setDiscounts }: Tprops) {
       />
       {!discounts.includes(text) && PROMOCODES[text] ? (
         <div className={styles.apply__row}>
-          <span>Promo code {text} for -{PROMOCODES[text]}%</span>
+          <span className={styles.apply__text}>Promo code {text} for -{PROMOCODES[text]}%</span>
           <button className={styles.button} type="submit">apply</button>
         </div>
       ) : ''}
