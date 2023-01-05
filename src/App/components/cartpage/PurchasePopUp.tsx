@@ -49,7 +49,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       placeholder: 'Enter phone',
       isValid: false,
       reg: /^\+\d{9,20}$/,
-      errorMsg: 'invalid input, must start with &apos;+&apos; and be more than 9 numbers long',
+      errorMsg: 'invalid input, must start with "+" and be more than 9 numbers long',
     },
     adress: {
       value: '',
@@ -218,10 +218,6 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           <div>CVV:</div>
           <PurchasePopUpInput inputKey="CVV" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
-
-        <div>is all form data valid? {isAllValid.toString()}</div>
-
-        <div>buttons active at all times for test purpuse only</div>
         <button type="button" onClick={fillTheForm}>quick fill</button>
         <button type="submit" className={styles.button__confirm} disabled={isPayed || (!isAllValid && showErrors)}>
           {isPayed ? 'Done ✔️' : 'Confirm'}
