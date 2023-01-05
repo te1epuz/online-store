@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getLocaleStoragePromo } from '../services/localStorage.service';
+import { getLocaleStoragePromo } from '../../services/localStorage.service';
 import styles from './CartSummary.module.scss';
-import DiscountsBlock from './discounts/DiscountsBlock';
-import PROMOCODES from './discounts/promocodes';
+import DiscountsBlock from '../discounts/DiscountsBlock';
+import PROMOCODES from '../discounts/promocodes';
 
 type TProps = {
   setIsPurchasePopUpEnabled: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Size.module.scss';
-import { SetURLSearchParams, TQueryParams } from '../types/types';
+import { SetURLSearchParams, TQueryParams } from '../../types/types';
 
 type TProps = {
   query: string;

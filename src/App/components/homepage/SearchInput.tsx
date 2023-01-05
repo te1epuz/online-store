@@ -1,5 +1,5 @@
 import React from 'react';
-import { SetURLSearchParams, TQueryParams } from '../types/types';
+import { SetURLSearchParams, TQueryParams } from '../../types/types';
 import styles from './SearchInput.module.scss';
 
 type TProps = {
