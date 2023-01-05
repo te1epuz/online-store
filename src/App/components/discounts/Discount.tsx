@@ -1,6 +1,7 @@
 import React from 'react';
 import { setLocaleStoragePromo } from '../../services/localStorage.service';
 import PROMOCODES from './promocodes';
+import styles from './Discount.module.scss';
 
 type Tprops = {
   discount: string;
@@ -15,9 +16,9 @@ function Discount({ discount, discounts, setDiscounts }: Tprops) {
     setLocaleStoragePromo(newArr);
   }
   return (
-    <div>
+    <div className={styles.wrapper}>
       <span>{discount} -{PROMOCODES[discount]}%</span>
-      <button type="button" onClick={handleDelete}>delete</button>
+      <button className={styles.button} type="button" onClick={handleDelete}>delete</button>
     </div>
   );
 }

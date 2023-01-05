@@ -26,13 +26,13 @@ function CartSummary({ setIsPurchasePopUpEnabled, totalItems, totalPrice }: TPro
 
   return (
     <div className={styles.wrapper}>
-      <h2>Summary</h2>
-      <div>Items: {totalItems}</div>
-      <div className={`${discounts.length > 0 ? styles.crossed_out : ''}`}>
-        Total: ${totalPrice.toFixed(2)}
+      <h2 className={styles.title}>Cart Summary</h2>
+      <div className={styles.items}>Items in cart: <b>{totalItems}</b></div>
+      <div className={`${styles.price} ${discounts.length > 0 ? styles.crossed_out : ''}`}>
+        Total price: <b>${totalPrice.toFixed(2)}</b>
       </div>
-      <div className={`${discounts.length === 0 ? styles.hidden : ''}`}>
-        Total: ${(totalPrice * (1 - totalDiscout / 100)).toFixed(2)}
+      <div className={`${styles.price__disc} ${discounts.length === 0 ? styles.hidden : ''}`}>
+        Total price: <b>${(totalPrice * (1 - totalDiscout / 100)).toFixed(2)}</b>
       </div>
       <DiscountsBlock discounts={discounts} setDiscounts={setDiscounts} />
       <button

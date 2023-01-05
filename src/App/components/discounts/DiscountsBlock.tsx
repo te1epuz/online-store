@@ -10,12 +10,12 @@ type Tprops = {
 
 function DiscountsBlock({ discounts, setDiscounts }: Tprops) {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div className={`${discounts.length === 0 ? styles.hidden : ''}`}>
         <DiscountList discounts={discounts} setDiscounts={setDiscounts} />
       </div>
       <DiscountForm discounts={discounts} setDiscounts={setDiscounts} />
-      <div>*promo codes only for you: RSS, TS, JS</div>
+      <div className={styles.text__small}>*promo codes only for you: RSS, TS, JS</div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Discount from './Discount';
+import styles from './DiscountsList.module.scss';
 
 type Tprops = {
   discounts: string[];
@@ -8,10 +9,8 @@ type Tprops = {
 
 function DiscountList({ discounts, setDiscounts }: Tprops) {
   return (
-    <div>
-      <div>
-        Applied discounts:
-      </div>
+    <div className={styles.wrapper}>
+      <div>Applied discounts:</div>
       {discounts.map((discount) =>
         <Discount key={discount} discount={discount} discounts={discounts} setDiscounts={setDiscounts} />)}
     </div>

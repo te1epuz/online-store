@@ -205,7 +205,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
         <div>E-mail:</div>
         <PurchasePopUpInput inputKey="email" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         <div>Bank Card number:</div>
-        <img src={cardImg} alt="credit card logo" />
+        <img src={cardImg} alt="credit card logo" width="50px" />
         <PurchasePopUpInput
           inputKey="creditcard"
           formText={formText}
