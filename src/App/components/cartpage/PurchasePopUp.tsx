@@ -42,49 +42,49 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       placeholder: 'Enter First and Last name',
       isValid: false,
       reg: /^[a-zA-Z]{3,}(\s([a-zA-Z]){3,}){1,}$/,
-      errorMsg: 'invalid input, must be at least 2 words, 3 letters each',
+      errorMsg: '*invalid input, must be at least 2 words, 3 letters each',
     },
     phone: {
       value: '',
       placeholder: 'Enter phone',
       isValid: false,
       reg: /^\+\d{9,20}$/,
-      errorMsg: 'invalid input, must start with "+" and be more than 9 numbers long',
+      errorMsg: '*invalid input, must start with "+" and be more than 9 numbers long',
     },
     adress: {
       value: '',
       placeholder: 'Enter adress',
       isValid: false,
       reg: /^[a-zA-Z]{5,}(\s([a-zA-Z]){5,})(\s([a-zA-Z]){5,}){1,}$/,
-      errorMsg: 'invalid input, must be at least 3 words, 5 letters each',
+      errorMsg: '*invalid input, must be at least 3 words, 5 letters each',
     },
     email: {
       value: '',
       placeholder: 'Enter valid e-mail',
       isValid: false,
       reg: /^\S+@\S+\.\S+$/,
-      errorMsg: 'invalid input, must be valid e-mail adress',
+      errorMsg: '*invalid input, must be valid e-mail adress',
     },
     creditcard: {
       value: '',
       placeholder: 'Enter credit card number',
       isValid: false,
       reg: /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
-      errorMsg: 'invalid input, must be 16 numbers long',
+      errorMsg: '*invalid input, must be 16 numbers long',
     },
     thru: {
       value: '',
       placeholder: '00/00',
       isValid: false,
       reg: /^(0[1-9]|1[0-2])\/(2[3-9]|[3-9][0-9])$/,
-      errorMsg: 'invalid input, must be valid date',
+      errorMsg: '*invalid input, must be valid date',
     },
     CVV: {
       value: '',
       placeholder: '000',
       isValid: false,
       reg: /^\d{3}$/,
-      errorMsg: 'invalid input, must be 3 digits',
+      errorMsg: '*invalid input, must be 3 digits',
     },
   });
   const [cardImg, setCardImg] = useState(cardImage);
@@ -196,33 +196,51 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       >close popup
       </button>
       <form className={styles.mainwindow} onSubmit={handleConfirm}>
-        <div>Name:</div>
-        <PurchasePopUpInput inputKey="name" formText={formText} setFormText={setFormText} showErrors={showErrors} />
-        <div>Phone:</div>
-        <PurchasePopUpInput inputKey="phone" formText={formText} setFormText={setFormText} showErrors={showErrors} />
-        <div>Adress:</div>
-        <PurchasePopUpInput inputKey="adress" formText={formText} setFormText={setFormText} showErrors={showErrors} />
-        <div>E-mail:</div>
-        <PurchasePopUpInput inputKey="email" formText={formText} setFormText={setFormText} showErrors={showErrors} />
-        <div>Bank Card number:</div>
-        <img src={cardImg} alt="credit card logo" width="50px" />
-        <PurchasePopUpInput
-          inputKey="creditcard"
-          formText={formText}
-          setFormText={setFormText}
-          showErrors={showErrors}
-        />
-        <div>
-          <div>valid thru:</div>
-          <PurchasePopUpInput inputKey="thru" formText={formText} setFormText={setFormText} showErrors={showErrors} />
-          <div>CVV:</div>
-          <PurchasePopUpInput inputKey="CVV" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+        <h1 className={styles.title}>Check Out Form</h1>
+        <div className={styles.input__row}>
+          <div>Name:</div>
+          <PurchasePopUpInput inputKey="name" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
-        <button type="button" onClick={fillTheForm}>quick fill</button>
+        <div className={styles.input__row}>
+          <div>Phone:</div>
+          <PurchasePopUpInput inputKey="phone" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+        </div>
+        <div className={styles.input__row}>
+          <div>Adress:</div>
+          <PurchasePopUpInput inputKey="adress" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+        </div>
+        <div className={styles.input__row}>
+          <div>E-mail:</div>
+          <PurchasePopUpInput inputKey="email" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+        </div>
+        <div className={styles.input__row}>
+          <div>Credit Card number:</div>
+          <PurchasePopUpInput
+            inputKey="creditcard"
+            formText={formText}
+            setFormText={setFormText}
+            showErrors={showErrors}
+          />
+          <img className={styles.card__img} src={cardImg} alt="credit card logo" />
+        </div>
+        <div className={styles.input__creditcard_row}>
+          <div className={styles.input__creditcard_info}>
+            <div>valid thru:</div>
+            <PurchasePopUpInput inputKey="thru" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+          </div>
+          <div className={styles.input__creditcard_info}>
+            <div>CVV:</div>
+            <PurchasePopUpInput inputKey="CVV" formText={formText} setFormText={setFormText} showErrors={showErrors} />
+          </div>
+        </div>
+
         <button type="submit" className={styles.button__confirm} disabled={isPayed || (!isAllValid && showErrors)}>
           {isPayed ? 'Done ✔️' : 'Confirm'}
         </button>
-        {isPayed ? <div>redirecting in {countDown}...</div> : <div>*press to finish</div>}
+        <div className={styles.footnote}>
+          {isPayed ? `redirecting in ${countDown}...` : '*press to finish' }
+        </div>
+        <button type="button" onClick={fillTheForm}>auto fill 😫</button>
       </form>
     </div>
   );

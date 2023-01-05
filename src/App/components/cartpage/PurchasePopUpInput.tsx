@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './PurchasePopUpInput.module.scss';
 
 type TProps = {
   inputKey: string;
@@ -26,8 +27,9 @@ type TProps = {
 function PurchasePopUpInput({ inputKey, formText, setFormText, showErrors } : TProps) {
   const newFormObj = { ...formText };
   return (
-    <div>
+    <div className={styles.wrapper}>
       <input
+        className={styles.input}
         placeholder={newFormObj[inputKey].placeholder}
         value={formText[inputKey].value}
         onChange={(event) => {
@@ -36,7 +38,7 @@ function PurchasePopUpInput({ inputKey, formText, setFormText, showErrors } : TP
         }}
       />
       {!formText[inputKey].isValid && showErrors ?
-        <div>{newFormObj[inputKey].errorMsg}</div> : ''}
+        <div className={styles.error__text}>{newFormObj[inputKey].errorMsg}</div> : ''}
     </div>
   );
 }
