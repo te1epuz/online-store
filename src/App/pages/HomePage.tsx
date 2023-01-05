@@ -67,7 +67,7 @@ function HomePage() {
     if (
       (product.title + product.category + product.description + product.brand)
         .toLowerCase()
-        .includes(search.toLowerCase()) &&
+        .includes(search.toLowerCase().trim()) &&
       (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
       (brandsParams?.length ? brandsParams.includes(product.brand) : true) &&
       (priceArr.length !== 1 ? product.price >= +priceArr[0] && product.price <= +priceArr[1] : true) &&
