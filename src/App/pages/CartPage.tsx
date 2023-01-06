@@ -11,11 +11,8 @@ import CartSummary from '../components/cartpage/CartSummary';
 import PurchasePopUp from '../components/cartpage/PurchasePopUp';
 
 function CartPage() {
-  const [cart, setCart, isFastBuy] = useOutletContext<[
-    TCart[],
-    React.Dispatch<React.SetStateAction<TCart[]>>,
-    boolean
-  ]>();
+  const [cart, setCart, isFastBuy] =
+    useOutletContext<[TCart[], React.Dispatch<React.SetStateAction<TCart[]>>, boolean]>();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const limit = searchParams.getAll('limit').includes('0') ? ['4'] : searchParams.getAll('limit');
@@ -69,7 +66,6 @@ function CartPage() {
   const itemsCrop = paginate(cart, currentPage, itemsOnPage);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(itemsCrop.length);
     setItemsOnPage(
       !+e.currentTarget.value ? 1 : +e.currentTarget.value > cart.length ? cart.length : +e.currentTarget.value,
     );
@@ -91,8 +87,7 @@ function CartPage() {
   return (
     <>
       <h1>Cart</h1>
-      <h2>TOTAL PRICE OF MY CART: ${totalPrice.toFixed(2)} ЪУЪ</h2>
-      <p>Items on PAGE :</p>{' '}
+      <p>Items on PAGE :</p>
       <input
         className={styles.cart_input}
         type="number"
@@ -125,8 +120,11 @@ function CartPage() {
           totalPrice={totalPrice}
         />
       </div>
-      {isPurchasePopUpEnabled === true
-        ? <PurchasePopUp setIsPurchasePopUpEnabled={setIsPurchasePopUpEnabled} setCart={setCart} /> : ''}
+      {isPurchasePopUpEnabled === true ? (
+        <PurchasePopUp setIsPurchasePopUpEnabled={setIsPurchasePopUpEnabled} setCart={setCart} />
+      ) : (
+        ''
+      )}
     </>
   );
 }

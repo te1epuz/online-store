@@ -39,7 +39,7 @@ function Counter({ totalItemPrice, listId, onIncrement, onDecrement, ...rest }: 
           <button className={styles.control_btn} onClick={handleDecrement} type="button">
             -
           </button>
-          <p>{rest.count}</p>
+          <p className={styles.card__count}>{rest.count}</p>
           <button
             className={styles.control_btn}
             disabled={rest.count >= rest.stock}
