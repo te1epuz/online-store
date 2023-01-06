@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useOutletContext, useNavigate } from 'react-router-dom';
+import { useParams, useOutletContext, useNavigate, NavLink } from 'react-router-dom';
 import { getProductById } from '../services/productService';
 import { TCart, TProduct } from '../types/types';
 import AddToCartBtn from '../components/AddToCartBtn';
@@ -10,12 +10,10 @@ function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState<TProduct | null | 'not found'>(null);
   const [currentImage, setCurrentImage] = useState<string>('');
-  const [cart, setCart,, setIsFastBuy] = useOutletContext<[
-    TCart[],
-    React.Dispatch<React.SetStateAction<TCart[]>>,
-    null,
-    React.Dispatch<React.SetStateAction<boolean>>
-  ]>();
+  const [cart, setCart, , setIsFastBuy] =
+    useOutletContext<
+      [TCart[], React.Dispatch<React.SetStateAction<TCart[]>>, null, React.Dispatch<React.SetStateAction<boolean>>]
+    >();
 
   async function getData() {
     const data = await getProductById(id);
@@ -32,7 +30,6 @@ function ProductDetails() {
 
   function changeCurrentImage(imageLink: string) {
     setCurrentImage(imageLink);
-    // TODO добавить изменение стилей для списка картинок с выделением текущей
   }
 
   const navigate = useNavigate();
@@ -53,7 +50,7 @@ function ProductDetails() {
       <>
         <h1>hmm...</h1>
         <h2>It seems product &apos;{id}&apos; doesn&apos;t exist :(</h2>
-        <Link to="/">Go back to main page</Link>
+        <NavLink to="/">Go back to main page</NavLink>
       </>
     );
   }
@@ -61,7 +58,7 @@ function ProductDetails() {
   return product !== null ? (
     <>
       <p className={styles.path}>
-        Store {'>'} {product.category} {'>'} {product.brand} {'>'} {product.title}
+        <NavLink to="/">Store</NavLink> {'>'} {product.category} {'>'} {product.brand} {'>'} {product.title}
       </p>
       <h1 className={styles.title}>{product.title}</h1>
       <div className={styles.content}>
@@ -85,29 +82,44 @@ function ProductDetails() {
         <div>
           <p>ID: {product.id}</p>
           <h3>Product Details:</h3>
-          <p><span className={styles.text_greyed}>Categoty:</span> {product.category}</p>
-          <p><span className={styles.text_greyed}>Brand:</span> {product.brand}</p>
-          <p><span className={styles.text_greyed}>Description:</span> {product.description}</p>
-          <p><span className={styles.text_greyed}>Rating:</span> {product.rating}</p>
-          <p><span className={styles.text_greyed}>Stock:</span> {product.stock}</p>
-          <p><span className={styles.text_greyed}>Discount:</span> {product.discountPercentage}%</p>
+          <p>
+            <span className={styles.text_greyed}>Categoty:</span> {product.category}
+          </p>
+          <p>
+            <span className={styles.text_greyed}>Brand:</span> {product.brand}
+          </p>
+          <p>
+            <span className={styles.text_greyed}>Description:</span> {product.description}
+          </p>
+          <p>
+            <span className={styles.text_greyed}>Rating:</span> {product.rating}
+          </p>
+          <p>
+            <span className={styles.text_greyed}>Stock:</span> {product.stock}
+          </p>
+          <p>
+            <span className={styles.text_greyed}>Discount:</span> {product.discountPercentage}%
+          </p>
           <h2 className={styles.price}>Price: ${product.price}</h2>
           <div className={styles.buttons}>
             <AddToCartBtn data={product} cart={cart} setCart={setCart} />
-            <button
-              className={styles.button__buynow}
-              onClick={handleBuyNow}
-              type="button"
-            >Buy Now
+            <button className={styles.button__buynow} onClick={handleBuyNow} type="button">
+              Buy Now
             </button>
           </div>
           <p className={styles.text_small}>* Buy Now option will instantly redirect You to Check Out, be carefull</p>
-          <p className={styles.text_small}>** Shipping: International Priority Shipping via Global Shipping Program
-            | <a href="http://" onClick={(event) => event.preventDefault()}>See details</a>
+          <p className={styles.text_small}>
+            ** Shipping: International Priority Shipping via Global Shipping Program |{' '}
+            <a href="http://" onClick={(event) => event.preventDefault()}>
+              See details
+            </a>
           </p>
-          <p className={styles.text_small}>*** For shipping Located in: Philadelphia, Pennsylvania, United States
-            Buyer pays for return shipping |&nbsp;
-            <a href="http://" onClick={(event) => event.preventDefault()}>See details</a>
+          <p className={styles.text_small}>
+            *** For shipping Located in: Philadelphia, Pennsylvania, United States Buyer pays for return shipping
+            |&nbsp;
+            <a href="http://" onClick={(event) => event.preventDefault()}>
+              See details
+            </a>
           </p>
         </div>
       </div>
