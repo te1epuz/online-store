@@ -1,4 +1,4 @@
-import { TCart } from '../types/types';
+import { TCart } from '../../types/types';
 import styles from './Counter.module.scss';
 
 type TProps = {

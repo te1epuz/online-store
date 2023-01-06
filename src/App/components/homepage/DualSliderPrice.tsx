@@ -1,7 +1,7 @@
 import ReactSlider from 'react-slider';
 import styles from './Slider.module.scss';
-import { SetURLSearchParams, TProduct, TQueryParams } from '../types/types';
-import quickSort from '../utils/quickSort';
+import { SetURLSearchParams, TProduct, TQueryParams } from '../../types/types';
+import quickSort from '../../utils/quickSort';
 
 type TProps = {
   products: TProduct[];

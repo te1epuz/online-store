@@ -1,0 +1,22 @@
+.wrapper {
+  margin-top: 5px;
+  display: flex;
+}
+
+.button {
+  margin-left: 10px;
+  display: block;
+  width: 50px;
+  // height: 35px;
+  border: solid 1px #ababab;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.1s;
+  background: white;
+}
+
+.button:hover {
+  color: white;
+  background: rgb(255, 0, 0);
+  border: solid 1px rgb(255, 0, 0);
+}

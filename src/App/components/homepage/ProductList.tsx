@@ -1,6 +1,6 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { TCart, TProduct } from '../types/types';
+import { TCart, TProduct } from '../../types/types';
 import ProductCard from './ProductCard';
 
 type TProps = {

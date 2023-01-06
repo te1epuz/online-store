@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TCart, TProduct } from '../types/types';
+import { TCart, TProduct } from '../../types/types';
 import styles from './ProductCard.module.scss';
-import AddToCartBtn from './AddToCartBtn';
+import AddToCartBtn from '../AddToCartBtn';
 
 type TProps = {
   data: TProduct;

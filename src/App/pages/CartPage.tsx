@@ -3,12 +3,12 @@ import { useOutletContext, useSearchParams } from 'react-router-dom';
 
 import { forceItemsToCart, removeItem } from '../services/localStorage.service';
 import { TCart } from '../types/types';
-import Counter from '../components/Counter';
+import Counter from '../components/cartpage/Counter';
 import { paginate } from '../utils/paginate';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/cartpage/Pagination';
 import styles from './CartPage.module.scss';
-import CartSummary from '../components/CartSummary';
-import PurchasePopUp from '../components/PurchasePopUp';
+import CartSummary from '../components/cartpage/CartSummary';
+import PurchasePopUp from '../components/cartpage/PurchasePopUp';
 
 function CartPage() {
   const [cart, setCart, isFastBuy] = useOutletContext<[

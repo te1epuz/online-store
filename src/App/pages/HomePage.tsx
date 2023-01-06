@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TProduct } from '../types/types';
 import styles from './HomePage.module.scss';
-import ProductList from '../components/ProductList';
-import CategoriesList from '../components/CategoriesList';
-import BrandsList from '../components/BrandList';
+import ProductList from '../components/homepage/ProductList';
+import CategoriesList from '../components/homepage/CategoriesList';
+import BrandsList from '../components/homepage/BrandList';
 import { getAllCategories, getAllProducts } from '../services/productService';
 import countProducts from '../utils/countProducts';
-import SearchInput from '../components/SearchInput';
-import SelectSortBy from '../components/SelectSortBy';
-import DualSliderPrice from '../components/DualSliderPrice';
+import SearchInput from '../components/homepage/SearchInput';
+import SelectSortBy from '../components/homepage/SelectSortBy';
+import DualSliderPrice from '../components/homepage/DualSliderPrice';
 import quickSort from '../utils/quickSort';
-import DualSliderStock from '../components/DualSliderStock';
-import Size from '../components/Size';
+import DualSliderStock from '../components/homepage/DualSliderStock';
+import Size from '../components/homepage/Size';
 
 function HomePage() {
   const [products, setProducts] = useState<TProduct[]>([]);

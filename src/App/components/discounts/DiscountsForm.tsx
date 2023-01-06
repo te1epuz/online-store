@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { setLocaleStoragePromo } from '../../services/localStorage.service';
 import PROMOCODES from './promocodes';
+import styles from './DiscountsForm.module.scss';
 
 type Tprops = {
   discounts: string[];
@@ -20,16 +21,17 @@ function DiscountForm({ discounts, setDiscounts }: Tprops) {
   }
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form className={styles.wrapper} onSubmit={onSubmitHandler}>
       <input
+        className={styles.input}
         placeholder="input promo code"
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
       {!discounts.includes(text) && PROMOCODES[text] ? (
-        <div>
-          <span>Promo code {text} for -{PROMOCODES[text]}%</span>
-          <button type="submit">apply</button>
+        <div className={styles.apply__row}>
+          <span className={styles.apply__text}>Promo code {text} for -{PROMOCODES[text]}%</span>
+          <button className={styles.button} type="submit">apply</button>
         </div>
       ) : ''}
     </form>
