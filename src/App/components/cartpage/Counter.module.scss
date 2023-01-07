@@ -1,0 +1,91 @@
+.card {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:last-child {
+    border-bottom: 1px solid black;
+  }
+}
+
+.card__id {
+  width: 3%;
+}
+
+.card__body {
+  display: flex;
+  width: 75%;
+  align-items: center;
+}
+
+.card__image {
+  width: 13%;
+  height: 100px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.card__title {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.card__description {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.card__info {
+  width: 87%;
+  text-align: center;
+}
+
+.card__controls {
+  width: 15%;
+}
+
+.card__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.control_btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 70px;
+  height: 25px;
+  border: solid 1px #ababab;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.1s;
+  background: white;
+  &:not([disabled]):hover {
+    color: white;
+    background: rgb(82, 111, 251);
+    border: solid 1px rgb(82, 111, 251);
+  }
+  &:disabled:hover {
+    cursor: auto;
+  }
+}
+.total {
+  text-align: center;
+}
+
+.card__count {
+  padding: 0 7px;
+}

@@ -1,0 +1,36 @@
+.container__size {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  width: 25px;
+  height: 25px;
+  color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  border: solid 1px rgb(82, 111, 251);
+  border-radius: 3px;
+}
+
+.button_grid {
+  background: url('../../assets/grid.png') center;
+  background-repeat: no-repeat;
+  background-size: 21px 21px;
+}
+
+.button_list {
+  background: url('../../assets/list.png') center;
+  background-repeat: no-repeat;
+  background-size: 27px 27px;
+}
+
+.size_active {
+  border: solid 1px #ababab;
+  border-radius: 3px;
+}

@@ -1,0 +1,42 @@
+$white: #ffffff;
+$light-blue: #3774ff;
+$gray: #dddddd;
+$white-blue: #83a9ff;
+
+.horizontal__slider {
+  top: -10px;
+  width: 80%;
+  max-width: 500px;
+  height: 50px;
+  .track {
+    top: 20px;
+    height: 4px;
+  }
+  .thumb {
+    top: 12px;
+    width: 10px;
+    outline: none;
+    height: 10px;
+    line-height: 48px;
+  }
+}
+.thumb {
+  cursor: pointer;
+  position: absolute;
+  z-index: 100;
+  background: $white;
+  border: 5px solid $light-blue;
+  border-radius: 100%;
+  display: block;
+  box-shadow: 0 0 2px 0 rgb(0 0 0);
+  &.active {
+    background-color: gray;
+  }
+}
+.track {
+  position: relative;
+  background: $gray;
+  &.track-0 {
+    background: $white-blue;
+  }
+}

@@ -1,0 +1,109 @@
+.wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: transparent;
+}
+
+.mainwindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  background: white;
+  width: 550px;
+  // height: 600px;
+  border-radius: 0.25rem;
+  border: 1px solid #ababab;
+  padding: 30px 30px;
+  white-space: nowrap;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 0.0625rem solid #f1f1f1;
+}
+
+.input__row {
+  display: flex;
+  height: 50px;
+  gap: 20px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.input__creditcard_row {
+  display: flex;
+  height: 50px;
+  gap: 20px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.input__creditcard_info {
+  display: flex;
+  gap: 20px;
+}
+
+.input__label {
+  width: 55px;
+}
+
+.card__img {
+  display: block;
+  width: 50px;
+  align-self: start;
+  margin-top: -3px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.button__confirm {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 120px;
+  height: 35px;
+  border: solid 1px #ababab;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.1s;
+  color: white;
+  background: rgb(82, 111, 251);
+  border: solid 1px rgb(82, 111, 251);
+}
+
+.button__confirm:hover {
+  color: white;
+  background: rgb(50, 84, 251);
+  border: solid 1px rgb(50, 84, 251);
+}
+
+.button__confirm:disabled {
+  // color: green;
+  pointer-events: none;
+}
+
+.footnote {
+  text-align: center;
+}
