@@ -1,2 +1,10 @@
-/* /index.html 200
-/* /index.html 404
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+      
+[[redirects]]
+  from = "/product-details"
+  to = "/index.html"
+  status = 302
+  query = {path = ":id"}
