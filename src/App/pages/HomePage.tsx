@@ -65,7 +65,16 @@ function HomePage() {
 
   const filteredArr = products.filter((product) => {
     if (
-      (product.title + product.category + product.description + product.brand)
+      (
+        product.title +
+        product.category +
+        product.description +
+        product.brand +
+        product.price +
+        product.discountPercentage +
+        product.stock +
+        product.rating
+      )
         .toLowerCase()
         .includes(search.toLowerCase().trim()) &&
       (categoriesParams?.length ? categoriesParams.includes(product.category) : true) &&
