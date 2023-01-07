@@ -1,10 +1,2 @@
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-      
-[[redirects]]
-  from = "/product-details"
-  to = "/index.html"
-  status = 404
-  query = {id = ":id"}
+/* /index.html 200
+/product-details /index.html 404
