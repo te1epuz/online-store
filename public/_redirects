@@ -1,2 +1,2 @@
 /* /index.html 200
-/product-details /index.html 404
+/product-details id=:id /product-details/:id 404
