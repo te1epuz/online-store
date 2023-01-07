@@ -6,5 +6,5 @@
 [[redirects]]
   from = "/product-details"
   to = "/index.html"
-  status = 302
-  query = {path = ":id"}
+  status = 404
+  query = {id = ":id"}
