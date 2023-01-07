@@ -198,19 +198,19 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
       <form className={styles.mainwindow} onSubmit={handleConfirm}>
         <h1 className={styles.title}>Check Out Form</h1>
         <div className={styles.input__row}>
-          <div>Name:</div>
+          <div className={styles.input__label}>Name:</div>
           <PurchasePopUpInput inputKey="name" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
         <div className={styles.input__row}>
-          <div>Phone:</div>
+          <div className={styles.input__label}>Phone:</div>
           <PurchasePopUpInput inputKey="phone" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
         <div className={styles.input__row}>
-          <div>Adress:</div>
+          <div className={styles.input__label}>Adress:</div>
           <PurchasePopUpInput inputKey="adress" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
         <div className={styles.input__row}>
-          <div>E-mail:</div>
+          <div className={styles.input__label}>E-mail:</div>
           <PurchasePopUpInput inputKey="email" formText={formText} setFormText={setFormText} showErrors={showErrors} />
         </div>
         <div className={styles.input__row}>
@@ -238,7 +238,7 @@ function PurchasePopUp({ setIsPurchasePopUpEnabled, setCart }: TProps) {
           {isPayed ? 'Done ✔️' : 'Confirm'}
         </button>
         <div className={styles.footnote}>
-          {isPayed ? `redirecting in ${countDown}...` : '*press to finish' }
+          {isPayed ? `PURCHASE COMPLETE redirecting in ${countDown}...` : '*press to finish' }
         </div>
         <button type="button" onClick={fillTheForm}>auto fill 😫</button>
       </form>
